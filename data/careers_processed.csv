@@ -1,0 +1,86 @@
+ job_title,required_skills,salary,SDG_category,processed_text,level
+Solar Technician,"basic math, problem solving",8k-15k,SDG7,"basic math, problem solving SDG7",Entry Level
+Anganwadi Worker,"hindi, teaching",6k-10k,SDG4,"hindi, teaching SDG4",Entry Level
+Agriculture Technician,"farming, problem solving",10k-18k,SDG2,"farming, problem solving SDG2",Intermediate
+Digital Literacy Trainer,"computer basics, communication",12k-20k,SDG4,"computer basics, communication SDG4",Intermediate
+Healthcare Assistant,"caregiving, basic hygiene",9k-15k,SDG3,"caregiving, basic hygiene SDG3",Entry Level
+Tailoring Specialist,"sewing, measurement, design",8k-14k,SDG8,"sewing, measurement, design SDG8",Intermediate
+Mobile Repair Technician,"technical skills, problem solving",10k-18k,SDG9,"technical skills, problem solving SDG9",Intermediate
+Beautician,"creativity, customer service",8k-16k,SDG8,"creativity, customer service SDG8",Intermediate
+Electrician,"technical skills, safety awareness",12k-22k,SDG7,"technical skills, safety awareness SDG7",Advanced
+Plumber,"technical skills, problem solving",10k-18k,SDG6,"technical skills, problem solving SDG6",Intermediate
+Mason,"construction skills, measurement",10k-20k,SDG11,"construction skills, measurement SDG11",Intermediate
+Carpenter,"woodworking, measurement, design",10k-18k,SDG9,"woodworking, measurement, design SDG9",Intermediate
+Welder,"technical skills, safety awareness",12k-22k,SDG9,"technical skills, safety awareness SDG9",Advanced
+Driver,"driving skills, navigation",10k-18k,SDG9,"driving skills, navigation SDG9",Entry Level
+Cook/Chef,"cooking, hygiene, creativity",8k-16k,SDG2,"cooking, hygiene, creativity SDG2",Intermediate
+Housekeeping Staff,"cleaning, organization",7k-12k,SDG11,"cleaning, organization SDG11",Entry Level
+Security Guard,"alertness, communication",8k-14k,SDG16,"alertness, communication SDG16",Entry Level
+Sales Assistant,"communication, customer service",8k-15k,SDG8,"communication, customer service SDG8",Entry Level
+Data Entry Operator,"typing, computer basics",9k-15k,SDG8,"typing, computer basics SDG8",Entry Level
+Receptionist,"communication, organization",8k-14k,SDG8,"communication, organization SDG8",Entry Level
+Farm Manager,"farming, management",15k-25k,SDG2,"farming, management SDG2",Advanced
+Dairy Farmer,"animal care, farming",12k-20k,SDG2,"animal care, farming SDG2",Intermediate
+Fisheries Technician,"fishing, water safety",10k-18k,SDG14,"fishing, water safety SDG14",Intermediate
+Poultry Farmer,"animal care, management",12k-20k,SDG2,"animal care, management SDG2",Intermediate
+Bee Keeper,"animal care, patience",10k-16k,SDG15,"animal care, patience SDG15",Intermediate
+Organic Farmer,"farming, organic methods",12k-22k,SDG2,"farming, organic methods SDG2",Advanced
+Nursery Worker,"plant care, gardening",8k-14k,SDG15,"plant care, gardening SDG15",Entry Level
+Food Processing Technician,"food safety, technical skills",10k-18k,SDG2,"food safety, technical skills SDG2",Intermediate
+Handicraft Artisan,"creativity, craftsmanship",8k-16k,SDG8,"creativity, craftsmanship SDG8",Intermediate
+Weaver,"creativity, technical skills",9k-15k,SDG9,"creativity, technical skills SDG9",Intermediate
+Potter,"creativity, craftsmanship",8k-14k,SDG12,"creativity, craftsmanship SDG12",Intermediate
+Bamboo Craftsman,"craftsmanship, technical skills",9k-16k,SDG12,"craftsmanship, technical skills SDG12",Intermediate
+Jewellery Maker,"creativity, precision",10k-18k,SDG8,"creativity, precision SDG8",Intermediate
+Textile Printer,"creativity, technical skills",9k-15k,SDG9,"creativity, technical skills SDG9",Intermediate
+Leather Worker,"craftsmanship, technical skills",10k-18k,SDG12,"craftsmanship, technical skills SDG12",Intermediate
+Community Health Worker,"communication, basic healthcare",8k-14k,SDG3,"communication, basic healthcare SDG3",Entry Level
+Yoga Instructor,"yoga knowledge, teaching",10k-20k,SDG3,"yoga knowledge, teaching SDG3",Intermediate
+Ayurvedic Therapist,"ayurveda knowledge, massage",12k-22k,SDG3,"ayurveda knowledge, massage SDG3",Advanced
+Pharmacist Assistant,"medicine knowledge, organization",12k-20k,SDG3,"medicine knowledge, organization SDG3",Intermediate
+Lab Assistant,"technical skills, precision",12k-18k,SDG3,"technical skills, precision SDG3",Intermediate
+Ambulance Driver,"driving skills, emergency response",12k-20k,SDG3,"driving skills, emergency response SDG3",Intermediate
+Telemedicine Operator,"communication, computer skills",10k-16k,SDG3,"communication, computer skills SDG3",Intermediate
+Water Quality Tester,"technical skills, attention to detail",12k-18k,SDG6,"technical skills, attention to detail SDG6",Intermediate
+Sanitation Worker,"cleaning, hygiene",8k-14k,SDG6,"cleaning, hygiene SDG6",Entry Level
+Waste Management Supervisor,"management, organization",12k-20k,SDG12,"management, organization SDG12",Advanced
+Solar Panel Cleaner,"cleaning, height comfort",8k-12k,SDG7,"cleaning, height comfort SDG7",Entry Level
+Biogas Plant Operator,"technical skills, maintenance",12k-20k,SDG7,"technical skills, maintenance SDG7",Advanced
+Wind Turbine Technician,"technical skills, height comfort",15k-25k,SDG7,"technical skills, height comfort SDG7",Advanced
+E-Rickshaw Driver,"driving skills, customer service",10k-16k,SDG11,"driving skills, customer service SDG11",Entry Level
+Cycle Repair Technician,"technical skills, problem solving",8k-14k,SDG11,"technical skills, problem solving SDG11",Intermediate
+Tour Guide,"communication, local knowledge",10k-18k,SDG8,"communication, local knowledge SDG8",Intermediate
+Homestay Manager,"hospitality, management",12k-20k,SDG8,"hospitality, management SDG8",Advanced
+Adventure Sports Instructor,"sports skills, safety awareness",15k-25k,SDG8,"sports skills, safety awareness SDG8",Advanced
+Photography Guide,"photography, local knowledge",10k-18k,SDG8,"photography, local knowledge SDG8",Intermediate
+Nature Conservation Guide,"environment knowledge, communication",12k-20k,SDG15,"environment knowledge, communication SDG15",Intermediate
+Computer Teacher,"computer skills, teaching",12k-20k,SDG4,"computer skills, teaching SDG4",Intermediate
+Spoken English Trainer,"english, teaching",12k-22k,SDG4,"english, teaching SDG4",Intermediate
+Accountant Assistant,"math, accounting basics",12k-20k,SDG8,"math, accounting basics SDG8",Intermediate
+Banking Correspondent,"math, communication",12k-18k,SDG8,"math, communication SDG8",Intermediate
+Insurance Agent,"communication, sales skills",10k-20k,SDG8,"communication, sales skills SDG8",Intermediate
+Micro-Enterprise Owner,"management, entrepreneurship",15k-30k,SDG8,"management, entrepreneurship SDG8",Advanced
+Packaging Assistant,"organization, attention to detail",8k-14k,SDG12,"organization, attention to detail SDG12",Entry Level
+Warehouse Helper,"organization, physical strength",8k-13k,SDG9,"organization, physical strength SDG9",Entry Level
+Delivery Personnel,"driving, navigation",10k-16k,SDG9,"driving, navigation SDG9",Entry Level
+Customer Support Executive,"communication, problem solving",12k-18k,SDG8,"communication, problem solving SDG8",Intermediate
+Social Media Assistant,"computer skills, creativity",12k-20k,SDG9,"computer skills, creativity SDG9",Intermediate
+Content Writer,"writing, research",12k-22k,SDG4,"writing, research SDG4",Intermediate
+Video Editor,"technical skills, creativity",15k-25k,SDG9,"technical skills, creativity SDG9",Advanced
+Solar Sales Executive,"communication, sales skills",12k-20k,SDG7,"communication, sales skills SDG7",Intermediate
+Water Conservation Specialist,"environment knowledge, technical skills",14k-22k,SDG6,"environment knowledge, technical skills SDG6",Advanced
+Early Childhood Educator,"teaching, child care",10k-16k,SDG4,"teaching, child care SDG4",Intermediate
+Renewable Energy Consultant,"technical knowledge, communication",18k-30k,SDG7,"technical knowledge, communication SDG7",Advanced
+Organic Food Inspector,"attention to detail, food safety",15k-22k,SDG2,"attention to detail, food safety SDG2",Advanced
+Digital Marketing Assistant,"computer skills, creativity",12k-20k,SDG8,"computer skills, creativity SDG8",Intermediate
+Waste Recycling Technician,"technical skills, environmental awareness",12k-18k,SDG12,"technical skills, environmental awareness SDG12",Intermediate
+Disaster Management Volunteer,"emergency response, communication",8k-15k,SDG11,"emergency response, communication SDG11",Entry Level
+Traditional Medicine Practitioner,"healing knowledge, communication",15k-25k,SDG3,"healing knowledge, communication SDG3",Advanced
+Eco-Tourism Coordinator,"hospitality, environment knowledge",14k-22k,SDG15,"hospitality, environment knowledge SDG15",Advanced
+Financial Literacy Educator,"math, teaching",12k-20k,SDG4,"math, teaching SDG4",Intermediate
+Clean Cooking Promoter,"communication, technical knowledge",10k-16k,SDG7,"communication, technical knowledge SDG7",Intermediate
+Rainwater Harvesting Technician,"technical skills, installation",12k-18k,SDG6,"technical skills, installation SDG6",Intermediate
+Community Radio Operator,"communication, technical skills",10k-16k,SDG16,"communication, technical skills SDG16",Intermediate
+Agroforestry Worker,"farming, forestry skills",12k-20k,SDG15,"farming, forestry skills SDG15",Intermediate
+Digital Payment Agent,"math, computer skills",10k-16k,SDG8,"math, computer skills SDG8",Intermediate
+Green Building Assistant,"construction skills, environmental awareness",12k-20k,SDG11,"construction skills, environmental awareness SDG11",Intermediate

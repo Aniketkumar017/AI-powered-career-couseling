@@ -1,0 +1,701 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>3D Rural Career Counsellor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { 
+            font-family: Arial; 
+            max-width: 800px; 
+            margin: 20px auto; 
+            padding: 20px; 
+            background-color: #f8f9fa;
+            /* Yellow border around the entire page */
+            border: 8px solid #ffc107;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            overflow-x: hidden;
+        }
+        
+        /* 3D container for depth */
+        .container-3d {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        
+        /* 3D card styling with red border for "Tell us about yourself" */
+        .card {
+            margin-bottom: 25px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border: none;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            transform: translateZ(0);
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+        }
+        
+        /* Specific red border for the "Tell us about yourself" card */
+        #aboutYourselfCard {
+            border: 3px solid #dc3545 !important;
+            box-shadow: 0 12px 30px rgba(220, 53, 69, 0.25);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px) rotateX(2deg) translateZ(10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .card-header { 
+            background: linear-gradient(to right, #0d6efd 0%, #0a58ca 100%);
+            color: white; 
+            font-weight: bold;
+            border-radius: 12px 12px 0 0 !important;
+            padding: 15px 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+        
+        .pathway-steps { 
+            background-color: #e9ecef; 
+            padding: 15px; 
+            border-radius: 8px; 
+            margin-top: 10px;
+            transform: translateZ(5px);
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+            border-left: 4px solid #0d6efd;
+        }
+        
+        .badge { 
+            font-size: 0.9em; 
+            margin-right: 5px;
+            transform: translateZ(5px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .hidden { 
+            display: none; 
+        }
+        
+        /* 3D Button styling */
+        .btn-3d {
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            box-shadow: 0 4px 0 #0a58ca, 0 5px 10px rgba(0,0,0,0.15);
+            transform: translateY(0) translateZ(0);
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-3d:hover {
+            transform: translateY(-2px) translateZ(10px);
+            box-shadow: 0 6px 0 #0a58ca, 0 8px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn-3d:active {
+            transform: translateY(2px) translateZ(0);
+            box-shadow: 0 2px 0 #0a58ca, 0 3px 5px rgba(0,0,0,0.1);
+        }
+        
+        /* 3D Form elements */
+        .form-control, .form-select {
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 1px solid #ced4da;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+            transform: translateZ(0);
+        }
+        
+        .form-control:focus, .form-select:focus {
+            transform: translateZ(5px);
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25), 0 3px 5px rgba(0,0,0,0.1);
+        }
+        
+        /* 3D Heading effects */
+        h1 {
+            text-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+            transform: translateZ(10px);
+            color: #0d6efd !important;
+            font-weight: bold;
+        }
+        
+        h2 {
+            transform: translateZ(5px);
+            color: #0a58ca;
+            border-bottom: 2px solid #ffc107;
+            padding-bottom: 10px;
+        }
+        
+        /* Floating animation for header */
+        @keyframes float {
+            0% { transform: translateY(0) translateZ(10px); }
+            50% { transform: translateY(-5px) translateZ(15px); }
+            100% { transform: translateY(0) translateZ(10px); }
+        }
+        
+        .text-center {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* 3D career cards */
+        .career-card {
+            transition: all 0.5s ease;
+            transform: rotateY(0deg);
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .career-card:hover {
+            transform: rotateY(5deg) translateZ(15px);
+        }
+        
+        /* 3D alert styling */
+        .alert {
+            transform: translateZ(10px);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        /* Background pattern for depth */
+        body:before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,193,7,0.05) 25%, transparent 25%, transparent 75%, rgba(255,193,7,0.05) 75%, rgba(255,193,7,0.05)),
+                        linear-gradient(45deg, rgba(255,193,7,0.05) 25%, transparent 25%, transparent 75%, rgba(255,193,7,0.05) 75%, rgba(255,193,7,0.05));
+            background-size: 60px 60px;
+            background-position: 0 0, 30px 30px;
+            z-index: -1;
+            opacity: 0.4;
+        }
+        
+        /* Pulse animation for the red border */
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(220, 53, 69, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
+        }
+        
+        #aboutYourselfCard {
+            animation: pulse-red 2s infinite;
+        }
+        
+        /* Voice controls styling */
+        .voice-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .voice-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .voice-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .language-selector {
+            background-color: white;
+            border-radius: 25px;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .speaking {
+            animation: pulse-speaking 1.5s infinite;
+        }
+        
+        @keyframes pulse-speaking {
+            0% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(40, 167, 69, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-3d">
+        <div class="text-center mb-4">
+            <h1 class="text-primary">AI Career Counsellor</h1>
+            <p class="text-muted">Empowering underprivileged youth with sustainable career pathways</p>
+        </div>
+
+        <div class="card" id="aboutYourselfCard">
+            <div class="card-header">Tell us about yourself</div>
+            <div class="card-body">
+                <form id="careerForm">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Your Skills:</label>
+                            <input type="text" id="skills" name="skills" class="form-control" placeholder="e.g. farming, math, communication" required>
+                            <div class="form-text">Separate skills with commas</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Education Level:</label>
+                            <select id="education" name="education" class="form-select" required>
+                                <option value="">Select education</option>
+                                <option value="8th_pass">8th Pass</option>
+                                <option value="10th_pass">10th Pass</option>
+                                <option value="12th_pass">12th Pass</option>
+                                <option value="graduate">Graduate</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Location:</label>
+                            <select id="location" name="location" class="form-select" required>
+                                <option value="">Select state</option>
+                                <option value="Rajasthan">Rajasthan</option>
+                                <option value="UP">Uttar Pradesh</option>
+                                <option value="Bihar">Bihar</option>
+                                <option value="Maharashtra">Maharashtra</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Willing to relocate?</label>
+                            <select id="relocate" name="relocate" class="form-select" required>
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-lg btn-3d w-100">Get Career Recommendations</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="errorAlert" class="alert alert-danger mt-3 hidden" role="alert">
+            <span id="errorMessage"></span>
+        </div>
+
+        <div id="resultsSection" class="mt-4 hidden">
+            <h2>Recommended Career Pathways</h2>
+            <p class="text-muted">Based on your profile, here are personalized career options:</p>
+            <div id="careerResults"></div>
+        </div>
+    </div>
+
+    <!-- Voice Controls -->
+    <div class="voice-controls">
+        <div class="language-selector">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="languageOption" id="englishOption" value="en" checked>
+                <label class="form-check-label" for="englishOption">English</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="languageOption" id="hindiOption" value="hi">
+                <label class="form-check-label" for="hindiOption">हिंदी</label>
+            </div>
+        </div>
+        <button id="speakBtn" class="voice-btn btn btn-success">
+            <i class="fas fa-volume-up"></i>
+        </button>
+        <button id="stopBtn" class="voice-btn btn btn-danger">
+            <i class="fas fa-stop"></i>
+        </button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    
+    <script>
+        // Sample career data
+        const careerData = [
+            {
+                job_title: "Agricultural Technician",
+                job_title_hi: "कृषि तकनीशियन",
+                salary: "₹15,000 - ₹25,000",
+                required_skills: "farming, basic math, observation",
+                required_skills_hi: "खेती, बुनियादी गणित, अवलोकन",
+                min_education: "10th_pass",
+                training_duration: 3,
+                SDG_category: "Zero Hunger",
+                SDG_category_hi: "शून्य भूख",
+                pathway_steps: "Complete basic agriculture training|Get hands-on experience at local farms|Obtain certification from agriculture department|Start working as farm technician",
+                pathway_steps_hi: "बुनियादी कृषि प्रशिक्षण पूरा करें|स्थानीय खेतों में व्यावहारिक अनुभव प्राप्त करें|कृषि विभाग से प्रमाणपत्र प्राप्त करें|खेत तकनीशियन के रूप में काम शुरू करें",
+                training_providers_link: "#"
+            },
+            {
+                job_title: "Solar Panel Installer",
+                job_title_hi: "सोलर पैनल इंस्टॉलर",
+                salary: "₹18,000 - ₹30,000",
+                required_skills: "basic technical skills, height comfort, safety awareness",
+                required_skills_hi: "बुनियादी तकनीकी कौशल, ऊंचाई का सामना, सुरक्षा जागरूकता",
+                min_education: "10th_pass",
+                training_duration: 4,
+                SDG_category: "Affordable Clean Energy",
+                SDG_category_hi: "सस्ती स्वच्छ ऊर्जा",
+                pathway_steps: "Complete solar installation training program|Assist experienced installers|Get certified by renewable energy agency|Start independent installation work",
+                pathway_steps_hi: "सौर स्थापना प्रशिक्षण कार्यक्रम पूरा करें|अनुभवी इंस्टॉलर की सहायता करें|नवीकरणीय ऊर्जा एजेंसी से प्रमाणित करें|स्वतंत्र स्थापना कार्य शुरू करें",
+                training_providers_link: "#"
+            },
+            {
+                job_title: "Healthcare Assistant",
+                job_title_hi: "हेल्थकेयर असिस्टेंट",
+                salary: "₹12,000 - ₹20,000",
+                required_skills: "caregiving, communication, basic hygiene",
+                required_skills_hi: "देखभाल, संचार, बुनियादी स्वच्छता",
+                min_education: "12th_pass",
+                training_duration: 6,
+                SDG_category: "Good Health and Well-being",
+                SDG_category_hi: "अच्छा स्वास्थ्य और कल्याण",
+                pathway_steps: "Complete healthcare assistant course|Obtain certification from medical board|Gain experience through internship|Apply to hospitals and clinics",
+                pathway_steps_hi: "हेल्थकेयर सहायक पाठ्यक्रम पूरा करें|मेडिकल बोर्ड से प्रमाणपत्र प्राप्त करें|इंटर्नशिप के माध्यम से अनुभव प्राप्त करें|अस्पतालों और क्लीनिकों में आवेदन करें",
+                training_providers_link: "#"
+            },
+            {
+                job_title: "Digital Literacy Trainer",
+                job_title_hi: "डिजिटल साक्षरता प्रशिक्षक",
+                salary: "₹15,000 - ₹28,000",
+                required_skills: "computer basics, communication, teaching",
+                required_skills_hi: "कंप्यूटर मूल बातें, संचार, शिक्षण",
+                min_education: "12th_pass",
+                training_duration: 2,
+                SDG_category: "Quality Education",
+                SDG_category_hi: "गुणवत्तापूर्ण शिक्षा",
+                pathway_steps: "Complete digital literacy trainer program|Volunteer at local community centers|Get certified by education department|Start teaching digital skills",
+                pathway_steps_hi: "डिजिटल साक्षरता प्रशिक्षक कार्यक्रम पूरा करें|स्थानीय सामुदायिक केंद्रों में स्वयंसेवक बनें|शिक्षा विभाग से प्रमाणित करें|डिजिटल कौशल सिखाना शुरू करें",
+                training_providers_link: "#"
+            }
+        ];
+
+        // Voice synthesis setup
+        let speech = null;
+        const speakBtn = document.getElementById('speakBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const languageOptions = document.getElementsByName('languageOption');
+        
+        // Check if browser supports speech synthesis
+        if ('speechSynthesis' in window) {
+            speech = window.speechSynthesis;
+            
+            // Populate voices once they are loaded
+            let voices = [];
+            speech.onvoiceschanged = () => {
+                voices = speech.getVoices();
+            };
+            
+            // Speak button event
+            speakBtn.addEventListener('click', () => {
+                // Stop any ongoing speech
+                speech.cancel();
+                
+                // Get selected language
+                const selectedLang = document.querySelector('input[name="languageOption"]:checked').value;
+                
+                // Speak the content based on language
+                speakContent(selectedLang);
+            });
+            
+            // Stop button event
+            stopBtn.addEventListener('click', () => {
+                speech.cancel();
+                speakBtn.classList.remove('speaking');
+            });
+            
+            // When speech starts
+            speech.addEventListener('start', () => {
+                speakBtn.classList.add('speaking');
+            });
+            
+            // When speech ends
+            speech.addEventListener('end', () => {
+                speakBtn.classList.remove('speaking');
+            });
+        } else {
+            // Hide voice controls if not supported
+            document.querySelector('.voice-controls').style.display = 'none';
+            console.warn("Speech synthesis not supported in this browser.");
+        }
+        
+        // Function to speak content based on language
+        function speakContent(lang) {
+            // Get the text to speak based on language and visible content
+            let textToSpeak = '';
+            
+            if (document.getElementById('resultsSection').classList.contains('hidden')) {
+                // If we're on the form page
+                if (lang === 'hi') {
+                    textToSpeak = "कैरियर परामर्श में आपका स्वागत है। कृपया अपने बारे में जानकारी भरें और करियर सिफारिशें प्राप्त करें।";
+                } else {
+                    textToSpeak = "Welcome to career counseling. Please fill in your information and get career recommendations.";
+                }
+            } else {
+                // If we're on the results page
+                const careerCards = document.querySelectorAll('.career-card');
+                
+                if (lang === 'hi') {
+                    textToSpeak = "आपकी प्रोफाइल के आधार पर, यहाँ व्यक्तिगत कैरियर विकल्प हैं। ";
+                    
+                    careerCards.forEach(card => {
+                        const title = card.querySelector('.card-header span').textContent;
+                        const salary = card.querySelector('.badge.bg-success').textContent;
+                        const skills = card.querySelector('.row.mb-3 p').textContent;
+                        
+                        textToSpeak += `${title}. वेतन: ${salary}. आवश्यक कौशल: ${skills}. `;
+                    });
+                } else {
+                    textToSpeak = "Based on your profile, here are personalized career options. ";
+                    
+                    careerCards.forEach(card => {
+                        const title = card.querySelector('.card-header span').textContent;
+                        const salary = card.querySelector('.badge.bg-success').textContent;
+                        const skills = card.querySelector('.row.mb-3 p').textContent;
+                        
+                        textToSpeak += `${title}. Salary: ${salary}. Required skills: ${skills}. `;
+                    });
+                }
+            }
+            
+            // Create and speak the utterance
+            const utterance = new SpeechSynthesisUtterance(textToSpeak);
+            
+            // Set language
+            utterance.lang = lang === 'hi' ? 'hi-IN' : 'en-US';
+            
+            // Try to find appropriate voice for the language
+            const voices = speech.getVoices();
+            const voice = voices.find(v => v.lang === utterance.lang) || voices[0];
+            
+            if (voice) {
+                utterance.voice = voice;
+            }
+            
+            // Set properties
+            utterance.rate = 0.9;
+            utterance.pitch = 1;
+            utterance.volume = 1;
+            
+            // Speak the text
+            speech.speak(utterance);
+        }
+
+        document.getElementById('careerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const skills = document.getElementById('skills').value;
+            const education = document.getElementById('education').value;
+            const location = document.getElementById('location').value;
+            const relocate = document.getElementById('relocate').value;
+            
+            // Basic validation
+            if (!skills || !education || !location || !relocate) {
+                showError('Please fill in all fields');
+                return;
+            }
+            
+            // Hide any previous error
+            hideError();
+            
+            // Filter careers based on education (simplified logic)
+            const userEducationLevel = getEducationLevel(education);
+            const filteredCareers = careerData.filter(career => {
+                const careerEducationLevel = getEducationLevel(career.min_education);
+                return careerEducationLevel <= userEducationLevel;
+            });
+            
+            // Display results
+            displayResults(filteredCareers);
+        });
+        
+        function getEducationLevel(education) {
+            const levels = {
+                '8th_pass': 1,
+                '10th_pass': 2,
+                '12th_pass': 3,
+                'graduate': 4
+            };
+            return levels[education] || 0;
+        }
+        
+        function showError(message) {
+            const errorAlert = document.getElementById('errorAlert');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            errorMessage.textContent = message;
+            errorAlert.classList.remove('hidden');
+            
+            // Add 3D effect to error
+            errorAlert.style.transform = 'translateZ(20px)';
+            
+            // Hide results if showing
+            document.getElementById('resultsSection').classList.add('hidden');
+        }
+        
+        function hideError() {
+            document.getElementById('errorAlert').classList.add('hidden');
+        }
+        
+        function displayResults(careers) {
+            const resultsContainer = document.getElementById('careerResults');
+            resultsContainer.innerHTML = '';
+            
+            if (careers.length === 0) {
+                showError('No career recommendations found based on your profile');
+                return;
+            }
+            
+            // Add 3D entrance animation to results section
+            document.getElementById('resultsSection').style.transform = 'translateZ(30px)';
+            document.getElementById('resultsSection').style.transition = 'transform 0.5s ease';
+            
+            // Get selected language for display
+            const selectedLang = document.querySelector('input[name="languageOption"]:checked').value;
+            
+            careers.forEach((career, index) => {
+                const careerCard = document.createElement('div');
+                careerCard.className = 'card career-card mb-3';
+                
+                // Add staggered animation
+                careerCard.style.animationDelay = `${index * 0.1}s`;
+                
+                const cardHeader = document.createElement('div');
+                cardHeader.className = 'card-header d-flex justify-content-between align-items-center';
+                
+                // Use Hindi text if selected
+                if (selectedLang === 'hi') {
+                    cardHeader.innerHTML = `
+                        <span>${career.job_title_hi}</span>
+                        <span class="badge bg-success">${career.salary}</span>
+                    `;
+                } else {
+                    cardHeader.innerHTML = `
+                        <span>${career.job_title}</span>
+                        <span class="badge bg-success">${career.salary}</span>
+                    `;
+                }
+                
+                const cardBody = document.createElement('div');
+                cardBody.className = 'card-body';
+                
+                const educationText = career.min_education.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase());
+                
+                // Create HTML based on selected language
+                if (selectedLang === 'hi') {
+                    cardBody.innerHTML = `
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <h6>आवश्यक कौशल:</h6>
+                                <p>${career.required_skills_hi}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>विवरण:</h6>
+                                <span class="badge bg-info">शिक्षा: ${educationText}</span>
+                                <span class="badge bg-warning">प्रशिक्षण: ${career.training_duration} महीने</span>
+                                <span class="badge bg-secondary">एसडीजी: ${career.SDG_category_hi}</span>
+                            </div>
+                        </div>
+
+                        <h6>कैरियर मार्ग:</h6>
+                        <div class="pathway-steps">
+                            <ol>
+                                ${career.pathway_steps_hi.split('|').map(step => `<li>${step}</li>`).join('')}
+                            </ol>
+                        </div>
+
+                        ${career.training_providers_link ? `
+                        <div class="mt-3">
+                            <a href="${career.training_providers_link}" target="_blank" class="btn btn-outline-primary btn-sm btn-3d">
+                                प्रशिक्षण अवसर देखें
+                            </a>
+                        </div>
+                        ` : ''}
+                    `;
+                } else {
+                    cardBody.innerHTML = `
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <h6>Required Skills:</h6>
+                                <p>${career.required_skills}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Details:</h6>
+                                <span class="badge bg-info">Education: ${educationText}</span>
+                                <span class="badge bg-warning">Training: ${career.training_duration} months</span>
+                                <span class="badge bg-secondary">SDG: ${career.SDG_category}</span>
+                            </div>
+                        </div>
+
+                        <h6>Career Pathway:</h6>
+                        <div class="pathway-steps">
+                            <ol>
+                                ${career.pathway_steps.split('|').map(step => `<li>${step}</li>`).join('')}
+                            </ol>
+                        </div>
+
+                        ${career.training_providers_link ? `
+                        <div class="mt-3">
+                            <a href="${career.training_providers_link}" target="_blank" class="btn btn-outline-primary btn-sm btn-3d">
+                                View Training Opportunities
+                            </a>
+                        </div>
+                        ` : ''}
+                    `;
+                }
+                
+                careerCard.appendChild(cardHeader);
+                careerCard.appendChild(cardBody);
+                resultsContainer.appendChild(careerCard);
+            });
+            
+            // Show results section
+            document.getElementById('resultsSection').classList.remove('hidden');
+            
+            // Scroll to results
+            document.getElementById('resultsSection').scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+            
+            // Auto-speak results in selected language
+            if (speech) {
+                setTimeout(() => {
+                    const selectedLang = document.querySelector('input[name="languageOption"]:checked').value;
+                    speakContent(selectedLang);
+                }, 1000);
+            }
+        }
+        
+        // Add language change listener to update content when language is changed
+        languageOptions.forEach(option => {
+            option.addEventListener('change', () => {
+                if (!document.getElementById('resultsSection').classList.contains('hidden')) {
+                    // If results are showing, refresh them with the new language
+                    const skills = document.getElementById('skills').value;
+                    const education = document.getElementById('education').value;
+                    const location = document.getElementById('location').value;
+                    const relocate = document.getElementById('relocate').value;
+                    
+                    const userEducationLevel = getEducationLevel(education);
+                    const filteredCareers = careerData.filter(career => {
+                        const careerEducationLevel = getEducationLevel(career.min_education);
+                        return careerEducationLevel <= userEducationLevel;
+                    });
+                    
+                    displayResults(filteredCareers);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
