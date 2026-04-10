@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <title>3D Rural Career Counsellor</title>
@@ -58,7 +58,7 @@
             background-color: #e9ecef; 
             padding: 15px; 
             border-radius: 8px; 
-            margin-top: 10px;
+            margin-top: 20px;
             transform: translateZ(5px);
             box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
             border-left: 4px solid #0d6efd;
@@ -677,7 +677,7 @@
         }
         
         // Add language change listener to update content when language is changed
-        languageOptions.forEach(option => {
+        Array.from(languageOptions).forEach(option => {
             option.addEventListener('change', () => {
                 if (!document.getElementById('resultsSection').classList.contains('hidden')) {
                     // If results are showing, refresh them with the new language
