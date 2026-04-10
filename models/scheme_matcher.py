@@ -18,13 +18,14 @@ class SchemeMatcher:
             self.schemes = pd.DataFrame()
 
     def get_schemes_for_job(self, job_title):
+        """Get government schemes relevant for a job"""
         if self.schemes.empty:
             return []
         
         relevant_schemes = []
         for _, scheme in self.schemes.iterrows():
-            linked_jobs = str(scheme['linked_jobs']).split(',')
+            linked_jobs = str(scheme.get('linked_jobs', '')).split(',')
             if job_title in linked_jobs or 'All' in linked_jobs:
                 relevant_schemes.append(scheme.to_dict())
         
-        return relevant_schemes
+        return relevant_schemes[:3]  # Return top 3 schemes

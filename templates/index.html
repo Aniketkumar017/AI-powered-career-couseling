@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Career Counselor | Find Your Perfect Career</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 22px;
+            font-weight: 700;
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: #555;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: #667eea;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        .hero-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 36px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+
+        .hero-subtitle {
+            color: #666;
+            font-size: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+        }
+
+        .sidebar {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .profile-header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+            margin-bottom: 20px;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+            margin: 0 auto 15px;
+            color: white;
+        }
+
+        .profile-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .profile-rank {
+            font-size: 12px;
+            color: #667eea;
+            font-weight: 500;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 13px;
+        }
+
+        .stat-value {
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .skill-section {
+            margin-top: 20px;
+        }
+
+        .skill-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #333;
+        }
+
+        .skill-tag {
+            background: #f0f0f0;
+            color: #555;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            display: inline-block;
+            margin: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .skill-tag:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .main-content {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .form-section {
+            background: #f8f9ff;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .section-header {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #667eea;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            display: block;
+            color: #555;
+        }
+
+        .form-control-custom {
+            width: 100%;
+            padding: 12px 14px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            color: #333;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .form-control-custom:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn-primary-custom {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: none;
+            padding: 14px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary-custom:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .career-card {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s;
+        }
+
+        .career-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-color: #667eea;
+        }
+
+        .card-header-custom {
+            background: linear-gradient(135deg, #f8f9ff, #fff);
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e0e0e0;
+            flex-wrap: wrap;
+        }
+
+        .career-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            background: #e8f5e9;
+            color: #4caf50;
+            font-weight: 500;
+        }
+
+        .card-body-custom {
+            padding: 20px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-label {
+            font-size: 11px;
+            color: #999;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .pathway-steps {
+            background: #f8f9ff;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .pathway-steps ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .pathway-steps li {
+            margin: 8px 0;
+            font-size: 13px;
+            color: #555;
+        }
+
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .spinner {
+            border: 3px solid #f0f0f0;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .alert-custom {
+            background: #ffebee;
+            border: 1px solid #ef9a9a;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #c62828;
+        }
+
+        .alert-success-custom {
+            background: #e8f5e9;
+            border: 1px solid #a5d6a7;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #2e7d32;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .connection-status {
+            background: #e8f5e9;
+            border: 1px solid #a5d6a7;
+            border-radius: 10px;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #2e7d32;
+        }
+
+        .voice-controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: white;
+            border-radius: 50px;
+            padding: 8px 20px;
+            display: flex;
+            gap: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            z-index: 1000;
+        }
+
+        .voice-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .voice-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .voice-btn.speaking {
+            animation: pulse 1s infinite;
+            background: #ff5722;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .language-selector {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .language-selector label {
+            cursor: pointer;
+            font-size: 12px;
+            color: #555;
+        }
+
+        .match-bar {
+            background: #f0f0f0;
+            border-radius: 10px;
+            height: 6px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .match-fill {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                position: relative;
+                top: 0;
+            }
+            .hero-title {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                Career<span style="color:#764ba2;">AI</span>
+            </a>
+            <div class="nav-menu">
+                <a href="#" class="nav-link active">Home</a>
+                <a href="#" class="nav-link">Dashboard</a>
+                <a href="#" class="nav-link">Resources</a>
+                <a href="#" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="hero-section">
+            <div class="hero-title">AI Powered Career Couselor</div>
+            <div class="hero-subtitle">
+                Find your perfect career match using our AI-powered recommendation engine
+            </div>
+        </div>
+
+        <div class="content-grid">
+            <div class="sidebar">
+                <div class="profile-header">
+                    <div class="profile-avatar">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div class="profile-name">Career Seeker</div>
+                    <div class="profile-rank">AI-Powered Guidance</div>
+                </div>
+                
+                <div class="stat-item">
+                    <span class="stat-label">Backend Status</span>
+                    <span class="stat-value" id="backendStatus">Checking...</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Careers Available</span>
+                    <span class="stat-value" id="careerCount">--</span>
+                </div>
+                
+                <div class="skill-section">
+                    <div class="skill-title">Quick Categories</div>
+                    <div>
+                        <span class="skill-tag" data-skill="farming, agriculture">🌾 Agriculture</span>
+                        <span class="skill-tag" data-skill="computer, coding, programming">💻 Technology</span>
+                        <span class="skill-tag" data-skill="healthcare, nursing">🏥 Healthcare</span>
+                        <span class="skill-tag" data-skill="teaching, communication">📚 Education</span>
+                        <span class="skill-tag" data-skill="business, management">🏪 Business</span>
+                        <span class="skill-tag" data-skill="electrical, plumbing">🔧 Trades</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <div id="connectionStatus" class="connection-status hidden">
+                    <i class="fas fa-check-circle"></i>
+                    <span id="connectionMessage"></span>
+                </div>
+
+                <div class="form-section">
+                    <div class="section-header">
+                        <i class="fas fa-clipboard-list"></i>
+                        Career Assessment
+                    </div>
+                    <form id="careerForm">
+                        <div class="form-group">
+                            <label class="form-label">Your Skills & Interests</label>
+                            <input type="text" id="skills" class="form-control-custom" 
+                                   placeholder="e.g., programming, python, web development" required>
+                            <small style="color: #999; font-size: 11px;">Separate skills with commas</small>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Education Level</label>
+                                    <select id="education" class="form-control-custom" required>
+                                        <option value="">Select</option>
+                                        <option value="8th_pass">8th Pass</option>
+                                        <option value="10th_pass">10th Pass</option>
+                                        <option value="12th_pass">12th Pass</option>
+                                        <option value="graduate">Graduate</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Location</label>
+                                    <select id="location" class="form-control-custom" required>
+                                        <option value="">Select</option>
+                                        <option value="Rajasthan">Rajasthan</option>
+                                        <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                        <option value="Bihar">Bihar</option>
+                                        <option value="Maharashtra">Maharashtra</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-primary-custom" id="submitBtn">
+                            <i class="fas fa-search"></i> Find My Career Path
+                        </button>
+                    </form>
+                </div>
+
+                <div id="loading" class="loading-spinner">
+                    <div class="spinner"></div>
+                    <p style="margin-top: 15px; color: #667eea;">Analyzing your profile...</p>
+                </div>
+
+                <div id="errorAlert" class="alert-custom hidden">
+                    <i class="fas fa-exclamation-triangle"></i> <span id="errorMessage"></span>
+                </div>
+                <div id="successAlert" class="alert-success-custom hidden">
+                    <i class="fas fa-check-circle"></i> <span id="successMessage"></span>
+                </div>
+
+                <div id="resultsSection" class="hidden">
+                    <div class="section-header" style="margin-bottom: 20px;">
+                        <i class="fas fa-check-circle"></i>
+                        Recommended Careers
+                        <span style="margin-left: auto; font-size: 12px;" id="resultCount"></span>
+                    </div>
+                    <div id="careerResults"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="voice-controls">
+        <div class="language-selector">
+            <input type="radio" name="languageOption" id="englishOption" value="en" checked>
+            <label for="englishOption">EN</label>
+            <input type="radio" name="languageOption" id="hindiOption" value="hi">
+            <label for="hindiOption">हिंदी</label>
+        </div>
+        <button id="speakBtn" class="voice-btn" title="Click to listen">
+            <i class="fas fa-volume-up"></i>
+        </button>
+        <button id="stopBtn" class="voice-btn" title="Stop speaking">
+            <i class="fas fa-stop"></i>
+        </button>
+    </div>
+
+    <audio id="audioPlayer" style="display: none;"></audio>
+
+    <script>
+        const API_BASE_URL = window.location.origin;
+        let currentAudio = null;
+        let isPlaying = false;
+        
+        // Hindi Text Mapping
+        const hindiTexts = {
+            welcome: "एआई करियर काउंसलर में आपका स्वागत है। कृपया अपने कौशल और शिक्षा की जानकारी भरें।",
+            fillForm: "कृपया अपने कौशल और शिक्षा की जानकारी भरें। सुझाव पाने के लिए फॉर्म भरें।",
+            analyzing: "आपकी प्रोफाइल का विश्लेषण किया जा रहा है। कृपया प्रतीक्षा करें।",
+            found: "करियर विकल्प मिले।",
+            noResults: "कोई करियर विकल्प नहीं मिला। कृपया अलग कौशल आज़माएं।",
+            saved: "सेव किया गया।",
+            alreadySaved: "पहले से सेव है।",
+            backendError: "बैकेंड कनेक्ट नहीं है। कृपया फ्लास्क सर्वर शुरू करें।",
+            fillAllFields: "कृपया सभी फ़ील्ड भरें।"
+        };
+        
+        // English Text Mapping
+        const englishTexts = {
+            welcome: "Welcome to AI Career Counselor. Please fill in your skills and education details.",
+            fillForm: "Please fill in your skills and education details. Click find my career path to get recommendations.",
+            analyzing: "Analyzing your profile. Please wait.",
+            found: "career recommendations found.",
+            noResults: "No career recommendations found. Please try different skills.",
+            saved: "has been saved to your list.",
+            alreadySaved: "is already in your saved list.",
+            backendError: "Backend not connected. Please start the Flask server.",
+            fillAllFields: "Please fill all fields before submitting."
+        };
+        
+        // Play audio from base64
+        function playAudio(base64Audio, contentType = 'audio/mpeg') {
+            try {
+                if (currentAudio) {
+                    currentAudio.pause();
+                    currentAudio = null;
+                }
+                
+                const audio = document.getElementById('audioPlayer');
+                const blob = base64ToBlob(base64Audio, contentType);
+                const url = URL.createObjectURL(blob);
+                
+                audio.src = url;
+                audio.play();
+                
+                audio.onplay = () => {
+                    isPlaying = true;
+                    document.getElementById('speakBtn').classList.add('speaking');
+                };
+                
+                audio.onended = () => {
+                    isPlaying = false;
+                    document.getElementById('speakBtn').classList.remove('speaking');
+                    URL.revokeObjectURL(url);
+                };
+                
+                audio.onerror = () => {
+                    isPlaying = false;
+                    document.getElementById('speakBtn').classList.remove('speaking');
+                    console.error('Audio playback error');
+                };
+                
+                currentAudio = audio;
+            } catch (error) {
+                console.error('Play audio error:', error);
+            }
+        }
+        
+        function base64ToBlob(base64, contentType) {
+            const byteCharacters = atob(base64);
+            const byteNumbers = new Array(byteCharacters.length);
+            for (let i = 0; i < byteCharacters.length; i++) {
+                byteNumbers[i] = byteCharacters.charCodeAt(i);
+            }
+            const byteArray = new Uint8Array(byteNumbers);
+            return new Blob([byteArray], { type: contentType });
+        }
+        
+        // Speak using backend TTS API
+        async function speakText(text, lang = 'en') {
+            try {
+                const endpoint = lang === 'hi' ? '/api/tts/hindi' : '/api/tts/english';
+                
+                const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text: text })
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.success && data.audio) {
+                        playAudio(data.audio, data.content_type);
+                    } else {
+                        console.error('TTS failed:', data.error);
+                        fallbackSpeak(text, lang);
+                    }
+                } else {
+                    console.error('TTS API error:', response.status);
+                    fallbackSpeak(text, lang);
+                }
+            } catch (error) {
+                console.error('Speak error:', error);
+                fallbackSpeak(text, lang);
+            }
+        }
+        
+        // Fallback using browser speech synthesis
+        function fallbackSpeak(text, lang) {
+            if (!window.speechSynthesis) {
+                console.warn('Speech synthesis not supported');
+                return;
+            }
+            
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang === 'hi' ? 'hi-IN' : 'en-US';
+            utterance.rate = 0.9;
+            
+            utterance.onstart = () => {
+                document.getElementById('speakBtn').classList.add('speaking');
+            };
+            
+            utterance.onend = () => {
+                document.getElementById('speakBtn').classList.remove('speaking');
+            };
+            
+            window.speechSynthesis.speak(utterance);
+        }
+        
+        // Read form fields
+        async function readFormFields() {
+            const skills = document.getElementById('skills').value || 'not filled';
+            const educationSelect = document.getElementById('education');
+            const education = educationSelect.options[educationSelect.selectedIndex]?.text || 'not selected';
+            const locationSelect = document.getElementById('location');
+            const location = locationSelect.options[locationSelect.selectedIndex]?.text || 'not selected';
+            const selectedLang = document.querySelector('input[name="languageOption"]:checked').value;
+            
+            if (selectedLang === 'hi') {
+                let educationHindi = '';
+                if (education === '8th Pass') educationHindi = 'आठवीं पास';
+                else if (education === '10th Pass') educationHindi = 'दसवीं पास';
+                else if (education === '12th Pass') educationHindi = 'बारहवीं पास';
+                else if (education === 'Graduate') educationHindi = 'स्नातक';
+                else educationHindi = education;
+                
+                const text = `आपके कौशल हैं: ${skills}. शिक्षा स्तर: ${educationHindi}. स्थान: ${location}.`;
+                await speakText(text, 'hi');
+            } else {
+                const text = `Your skills are ${skills}. Education level is ${education}. Location is ${location}.`;
+                await speakText(text, 'en');
+            }
+        }
+        
+        // Read results
+        async function readResults() {
+            const careerCards = document.querySelectorAll('.career-card');
+            const selectedLang = document.querySelector('input[name="languageOption"]:checked').value;
+            
+            if (careerCards.length === 0) {
+                if (selectedLang === 'hi') {
+                    await speakText(hindiTexts.noResults, 'hi');
+                } else {
+                    await speakText(englishTexts.noResults, 'en');
+                }
+                return;
+            }
+            
+            if (selectedLang === 'hi') {
+                let text = `${careerCards.length} ${hindiTexts.found} `;
+                careerCards.forEach((card, index) => {
+                    const title = card.querySelector('.career-title')?.textContent || 'अज्ञात';
+                    const match = card.querySelector('.status-badge')?.textContent || '';
+                    text += `${index + 1}. ${title}. ${match}. `;
+                });
+                await speakText(text, 'hi');
+            } else {
+                let text = `Found ${careerCards.length} ${englishTexts.found} `;
+                careerCards.forEach((card, index) => {
+                    const title = card.querySelector('.career-title')?.textContent || 'Unknown';
+                    const match = card.querySelector('.status-badge')?.textContent || '';
+                    text += `${index + 1}. ${title}. ${match}. `;
+                });
+                await speakText(text, 'en');
+            }
+        }
+        
+        // Main speak function
+        async function speakBasedOnLanguage() {
+            const resultsSection = document.getElementById('resultsSection');
+            const selectedLang = document.querySelector('input[name="languageOption"]:checked').value;
+            
+            if (!resultsSection.classList.contains('hidden')) {
+                await readResults();
+            } else {
+                if (selectedLang === 'hi') {
+                    await speakText(hindiTexts.fillForm, 'hi');
+                } else {
+                    await speakText(englishTexts.fillForm, 'en');
+                }
+            }
+        }
+        
+        async function checkBackendHealth() {
+            const statusSpan = document.getElementById('backendStatus');
+            const statusDiv = document.getElementById('connectionStatus');
+            const messageSpan = document.getElementById('connectionMessage');
+            const careerCountSpan = document.getElementById('careerCount');
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/health`, {
+                    method: 'GET',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    statusSpan.innerHTML = '✅ Online';
+                    statusSpan.style.color = '#4caf50';
+                    messageSpan.innerHTML = 'Connected to AI Backend';
+                    statusDiv.classList.remove('hidden');
+                    careerCountSpan.innerHTML = '20+';
+                    setTimeout(() => statusDiv.classList.add('hidden'), 3000);
+                    return true;
+                } else {
+                    throw new Error('Health check failed');
+                }
+            } catch (error) {
+                statusSpan.innerHTML = '⚠️ Offline';
+                statusSpan.style.color = '#ff9800';
+                messageSpan.innerHTML = 'Backend not connected. Start Flask server: python app.py';
+                statusDiv.classList.remove('hidden');
+                careerCountSpan.innerHTML = '--';
+                return false;
+            }
+        }
+        
+        async function getCareerRecommendations(skills, education, location) {
+            const response = await fetch(`${API_BASE_URL}/api/careers/recommend`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ skills, education, location })
+            });
+            
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+            
+            const data = await response.json();
+            return data;
+        }
+        
+        function showLoading(show) {
+            document.getElementById('loading').style.display = show ? 'block' : 'none';
+            document.getElementById('submitBtn').disabled = show;
+        }
+        
+        function showError(message) {
+            const alert = document.getElementById('errorAlert');
+            document.getElementById('errorMessage').textContent = message;
+            alert.classList.remove('hidden');
+            setTimeout(() => alert.classList.add('hidden'), 5000);
+        }
+        
+        function showSuccess(message) {
+            const alert = document.getElementById('successAlert');
+            document.getElementById('successMessage').textContent = message;
+            alert.classList.remove('hidden');
+            setTimeout(() => alert.classList.add('hidden'), 3000);
+        }
+        
+        function displayResults(data) {
+            const resultsContainer = document.getElementById('careerResults');
+            const resultsSection = document.getElementById('resultsSection');
+            const resultCountSpan = document.getElementById('resultCount');
+            
+            if (!data.success || !data.data || data.data.length === 0) {
+                resultsContainer.innerHTML = '<div style="text-align:center;padding:40px;color:#999;">No careers found. Try different skills!</div>';
+                resultsSection.classList.remove('hidden');
+                resultCountSpan.innerHTML = '0 results';
+                return;
+            }
+            
+            const careers = data.data;
+            resultCountSpan.innerHTML = `${careers.length} careers found`;
+            resultsContainer.innerHTML = '';
+            
+            careers.forEach(career => {
+                const card = document.createElement('div');
+                card.className = 'career-card';
+                
+                let steps = career.pathway_steps ? career.pathway_steps.split('|') : ['Complete education', 'Get training', 'Apply for jobs'];
+                const matchPercent = career.match_percent || 70;
+                
+                card.innerHTML = `
+                    <div class="card-header-custom">
+                        <div class="career-title"> ${career.job_title}</div>
+                        <div class="status-badge"> ${career.salary || '₹10,000-20,000'}</div>
+                    </div>
+                    <div class="card-body-custom">
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <div class="info-label">Required Skills</div>
+                                <div class="info-value">${career.required_skills || 'General skills'}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Education</div>
+                                <div class="info-value">${(career.min_education || '10th_pass').toUpperCase()}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Training Duration</div>
+                                <div class="info-value">${career.training_duration || 6} months</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Match Score</div>
+                                <div class="info-value">
+                                    ${matchPercent}%
+                                    <div class="match-bar">
+                                        <div class="match-fill" style="width: ${matchPercent}%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="pathway-steps">
+                            <strong><i class="fas fa-road"></i> Career Pathway:</strong>
+                            <ol>
+                                ${steps.map(step => `<li>${step.trim()}</li>`).join('')}
+                            </ol>
+                        </div>
+                        
+                        <button onclick="saveCareer('${career.job_title}')" style="margin-top: 15px; background: linear-gradient(135deg, #667eea, #764ba2); border: none; padding: 10px; border-radius: 8px; color: white; cursor: pointer; width: 100%; font-weight: 500;">
+                            Save This Career
+                        </button>
+                    </div>
+                `;
+                resultsContainer.appendChild(card);
+            });
+            
+            resultsSection.classList.remove('hidden');
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+            
+            setTimeout(() => {
+                readResults();
+            }, 500);
+        }
+        
+        async function saveCareer(title) {
+            let saved = JSON.parse(localStorage.getItem('savedCareers') || '[]');
+            const selectedLang = document.querySelector('input[name="languageOption"]:checked').value;
+            
+            if (!saved.includes(title)) {
+                saved.push(title);
+                localStorage.setItem('savedCareers', JSON.stringify(saved));
+                showSuccess(`"${title}" saved to your list!`);
+                if (selectedLang === 'hi') {
+                    await speakText(`${title} ${hindiTexts.saved}`, 'hi');
+                } else {
+                    await speakText(`${title} ${englishTexts.saved}`, 'en');
+                }
+            } else {
+                showError(`"${title}" is already saved!`);
+                if (selectedLang === 'hi') {
+                    await speakText(`${title} ${hindiTexts.alreadySaved}`, 'hi');
+                } else {
+                    await speakText(`${title} ${englishTexts.alreadySaved}`, 'en');
+                }
+            }
+        }
+        
+        // Event Listeners
+        document.getElementById('speakBtn').addEventListener('click', () => {
+            speakBasedOnLanguage();
+        });
+        
+        document.getElementById('stopBtn').addEventListener('click', () => {
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio = null;
+                isPlaying = false;
+                document.getElementById('speakBtn').classList.remove('speaking');
+                showSuccess('Voice stopped');
+            }
+            if (window.speechSynthesis) {
+                window.speechSynthesis.cancel();
+            }
+        });
+        
+        document.getElementById('careerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const skills = document.getElementById('skills').value.trim();
+            const education = document.getElementById('education').value;
+            const location = document.getElementById('location').value;
+            const selectedLang = document.querySelector('input[name="languageOption"]:checked').value;
+            
+            if (!skills || !education || !location) {
+                showError('Please fill all fields');
+                if (selectedLang === 'hi') {
+                    await speakText(hindiTexts.fillAllFields, 'hi');
+                } else {
+                    await speakText(englishTexts.fillAllFields, 'en');
+                }
+                return;
+            }
+            
+            showLoading(true);
+            document.getElementById('resultsSection').classList.add('hidden');
+            
+            try {
+                const backendConnected = await checkBackendHealth();
+                if (!backendConnected) {
+                    showError('Backend not connected. Please start Flask server');
+                    if (selectedLang === 'hi') {
+                        await speakText(hindiTexts.backendError, 'hi');
+                    } else {
+                        await speakText(englishTexts.backendError, 'en');
+                    }
+                    showLoading(false);
+                    return;
+                }
+                
+                if (selectedLang === 'hi') {
+                    await speakText(hindiTexts.analyzing, 'hi');
+                } else {
+                    await speakText(englishTexts.analyzing, 'en');
+                }
+                
+                const data = await getCareerRecommendations(skills, education, location);
+                displayResults(data);
+            } catch (error) {
+                showError('Error: ' + error.message);
+            } finally {
+                showLoading(false);
+            }
+        });
+        
+        document.querySelectorAll('.skill-tag').forEach(tag => {
+            tag.addEventListener('click', () => {
+                const skillValue = tag.getAttribute('data-skill');
+                if (skillValue) {
+                    document.getElementById('skills').value = skillValue;
+                    document.getElementById('careerForm').dispatchEvent(new Event('submit'));
+                }
+            });
+        });
+        
+        document.querySelectorAll('input[name="languageOption"]').forEach(radio => {
+            radio.addEventListener('change', async (e) => {
+                if (e.target.value === 'hi') {
+                    await speakText(hindiTexts.welcome, 'hi');
+                } else {
+                    await speakText(englishTexts.welcome, 'en');
+                }
+            });
+        });
+        
+        window.saveCareer = saveCareer;
+        
+        // Initialize
+        window.addEventListener('load', async () => {
+            const selectedLang = document.querySelector('input[name="languageOption"]:checked').value;
+            if (selectedLang === 'hi') {
+                await speakText(hindiTexts.welcome, 'hi');
+            } else {
+                await speakText(englishTexts.welcome, 'en');
+            }
+        });
+        
+        checkBackendHealth();
+        setInterval(checkBackendHealth, 30000);
+    </script>
+</body>
+</html>

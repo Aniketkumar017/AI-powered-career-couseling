@@ -33,4 +33,4 @@ careers.to_csv(
     index=False
 )
 
-print("✅ TF-IDF model trained successfully (PATH FIXED)")
+print("TF-IDF model trained successfully (PATH FIXED)")
