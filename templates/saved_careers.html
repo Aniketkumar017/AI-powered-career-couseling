@@ -1,0 +1,424 @@
+{% extends "base.html" %}
+
+{% block title %}Saved Careers - CareerAI{% endblock %}
+
+{% block extra_css %}
+<style>
+    .saved-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 20px;
+        padding: 30px 40px;
+        color: white;
+        margin-bottom: 30px;
+    }
+    
+    .saved-header h2 {
+        font-weight: 700;
+    }
+    
+    .saved-header p {
+        opacity: 0.9;
+        margin-bottom: 0;
+    }
+    
+    .saved-card {
+        background: white;
+        border-radius: 16px;
+        padding: 20px;
+        transition: all 0.3s ease;
+        border: 1px solid #e8ecf1;
+        height: 100%;
+        position: relative;
+    }
+    
+    .saved-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        border-color: #667eea;
+    }
+    
+    .saved-card .card-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 10px;
+        padding-right: 80px;
+    }
+    
+    .saved-card .card-meta {
+        color: #999;
+        font-size: 13px;
+        margin-bottom: 10px;
+    }
+    
+    .saved-card .card-meta i {
+        margin-right: 5px;
+    }
+    
+    .saved-card .card-actions {
+        display: flex;
+        gap: 8px;
+        margin-top: 15px;
+        flex-wrap: wrap;
+    }
+    
+    .saved-card .save-date {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        font-size: 11px;
+        color: #999;
+        background: #f0f2f8;
+        padding: 3px 12px;
+        border-radius: 12px;
+    }
+    
+    .empty-state {
+        text-align: center;
+        padding: 80px 20px;
+        background: white;
+        border-radius: 20px;
+    }
+    
+    .empty-state i {
+        font-size: 80px;
+        color: #d0d5e0;
+        margin-bottom: 20px;
+    }
+    
+    .empty-state h4 {
+        color: #333;
+        margin-bottom: 10px;
+    }
+    
+    .empty-state p {
+        color: #999;
+        margin-bottom: 20px;
+    }
+    
+    .btn-remove {
+        background: #fce4ec;
+        color: #c62828;
+        border: none;
+        padding: 6px 14px;
+        border-radius: 8px;
+        font-size: 13px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    
+    .btn-remove:hover {
+        background: #f44336;
+        color: white;
+        transform: translateY(-2px);
+    }
+    
+    .btn-view {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border: none;
+        padding: 6px 16px;
+        border-radius: 8px;
+        font-size: 13px;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+    }
+    
+    .btn-view:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        color: white;
+        text-decoration: none;
+    }
+    
+    .btn-save-all {
+        background: #e8f5e9;
+        color: #2e7d32;
+        border: none;
+        padding: 8px 20px;
+        border-radius: 10px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    
+    .btn-save-all:hover {
+        background: #4caf50;
+        color: white;
+        transform: translateY(-2px);
+    }
+    
+    .empty-state .btn-explore {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 12px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+    }
+    
+    .empty-state .btn-explore:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        color: white;
+        text-decoration: none;
+    }
+    
+    @media (max-width: 768px) {
+        .saved-header {
+            padding: 20px;
+        }
+        .saved-header h2 {
+            font-size: 24px;
+        }
+        .saved-card .save-date {
+            position: static;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+        .saved-card .card-title {
+            padding-right: 0;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <!-- Header -->
+    <div class="saved-header">
+        <div class="d-flex justify-content-between align-items-center flex-wrap">
+            <div>
+                <h2><i class="fas fa-bookmark me-2"></i> Saved Careers</h2>
+                <p>Your curated list of career paths</p>
+            </div>
+            {% if careers %}
+            <div>
+                <span class="badge bg-light text-dark fs-6 me-2">{{ careers|length }} saved</span>
+                <button class="btn-save-all" onclick="exportSaved()">
+                    <i class="fas fa-download"></i> Export List
+                </button>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Saved Careers List -->
+    {% if careers %}
+        <div class="row g-4">
+            {% for item in careers %}
+            <div class="col-md-6 col-lg-4">
+                <div class="saved-card" id="card-{{ loop.index }}">
+                    <span class="save-date">
+                        <i class="far fa-calendar-alt"></i> {{ item.saved_at[:10] }}
+                    </span>
+                    
+                    <div class="card-title">{{ item.career_title }}</div>
+                    
+                    <!-- Display career data without from_json filter -->
+                    <div class="card-meta">
+                        <i class="fas fa-tag"></i> 
+                        {% if item.career_data %}
+                            {% if '"salary"' in item.career_data %}
+                                {% set salary_start = item.career_data.find('"salary"') %}
+                                {% if salary_start != -1 %}
+                                    {% set salary_part = item.career_data[salary_start:salary_start+100] %}
+                                    {% set salary_value = salary_part.split(':')[1].split(',')[0].strip(' "') %}
+                                    {{ salary_value }}
+                                {% else %}
+                                    Salary: Not specified
+                                {% endif %}
+                            {% else %}
+                                Salary: Not specified
+                            {% endif %}
+                        {% else %}
+                            Salary: Not specified
+                        {% endif %}
+                    </div>
+                    
+                    <div class="card-actions">
+                        <a href="/career/{{ item.career_title }}" class="btn-view">
+                            <i class="fas fa-eye"></i> View Details
+                        </a>
+                        <button onclick="removeSavedCareer('{{ item.career_title }}', '{{ loop.index }}')" class="btn-remove">
+                            <i class="fas fa-trash-alt"></i> Remove
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <!-- Empty State -->
+        <div class="empty-state">
+            <i class="fas fa-bookmark"></i>
+            <h4>No Saved Careers Yet</h4>
+            <p>Start exploring careers and save the ones that interest you!</p>
+            <a href="{{ url_for('dashboard') }}" class="btn-explore">
+                <i class="fas fa-search"></i> Explore Careers
+            </a>
+        </div>
+    {% endif %}
+</div>
+
+<script>
+// Function to remove saved career
+function removeSavedCareer(title, cardId) {
+    if (!confirm('Remove "' + title + '" from your saved careers?')) {
+        return;
+    }
+    
+    var card = document.getElementById('card-' + cardId);
+    if (card) {
+        card.style.opacity = '0.5';
+        card.style.pointerEvents = 'none';
+    }
+    
+    fetch('/api/careers/saved/' + encodeURIComponent(title), {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' }
+    })
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(data) {
+        if (data.success) {
+            showNotification('Career removed successfully!', 'success');
+            if (card) {
+                card.style.transition = 'all 0.3s ease';
+                card.style.transform = 'scale(0.9)';
+                card.style.opacity = '0';
+                setTimeout(function() {
+                    card.remove();
+                    var remaining = document.querySelectorAll('.saved-card');
+                    if (remaining.length === 0) {
+                        location.reload();
+                    }
+                }, 300);
+            } else {
+                location.reload();
+            }
+        } else {
+            showNotification('Error: ' + data.error, 'danger');
+            if (card) {
+                card.style.opacity = '1';
+                card.style.pointerEvents = 'auto';
+            }
+        }
+    })
+    .catch(function(error) {
+        showNotification('Error removing career: ' + error.message, 'danger');
+        if (card) {
+            card.style.opacity = '1';
+            card.style.pointerEvents = 'auto';
+        }
+    });
+}
+
+// Export saved careers as text
+function exportSaved() {
+    var careers = document.querySelectorAll('.saved-card .card-title');
+    if (careers.length === 0) {
+        showNotification('No careers to export', 'warning');
+        return;
+    }
+    
+    var text = 'My Saved Careers - CareerAI\n';
+    text += '='.repeat(40) + '\n\n';
+    text += 'Saved on: ' + new Date().toLocaleDateString() + '\n\n';
+    
+    careers.forEach(function(card, index) {
+        text += (index + 1) + '. ' + card.textContent.trim() + '\n';
+    });
+    
+    text += '\n' + '='.repeat(40) + '\n';
+    text += 'Total: ' + careers.length + ' careers saved\n';
+    
+    var blob = new Blob([text], { type: 'text/plain' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'saved_careers_' + new Date().toISOString().slice(0, 10) + '.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    
+    showNotification('Exported ' + careers.length + ' careers!', 'success');
+}
+
+function showNotification(message, type) {
+    type = type || 'info';
+    
+    var colors = {
+        success: '#4caf50',
+        danger: '#f44336',
+        warning: '#ff9800',
+        info: '#667eea'
+    };
+    
+    var icons = {
+        success: 'fa-check-circle',
+        danger: 'fa-exclamation-circle',
+        warning: 'fa-exclamation-triangle',
+        info: 'fa-info-circle'
+    };
+    
+    var notification = document.createElement('div');
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: white;
+        padding: 16px 24px;
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        border-left: 4px solid ${colors[type]};
+        z-index: 9999;
+        max-width: 400px;
+        animation: slideIn 0.3s ease;
+    `;
+    notification.innerHTML = `
+        <div class="d-flex align-items-center gap-3">
+            <i class="fas ${icons[type]}" style="color: ${colors[type]}; font-size: 20px;"></i>
+            <span>${message}</span>
+            <button onclick="this.parentElement.parentElement.remove()" style="background: none; border: none; color: #999; font-size: 18px; cursor: pointer;">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    `;
+    document.body.appendChild(notification);
+    
+    setTimeout(function() {
+        if (notification.parentElement) {
+            notification.style.animation = 'fadeOut 0.3s ease forwards';
+            setTimeout(function() {
+                if (notification.parentElement) {
+                    notification.remove();
+                }
+            }, 300);
+        }
+    }, 5000);
+}
+
+// Add animation keyframes
+(function() {
+    var style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translateX(0); }
+            to { opacity: 0; transform: translateX(100px); }
+        }
+    `;
+    document.head.appendChild(style);
+})();
+</script>
+{% endblock %}

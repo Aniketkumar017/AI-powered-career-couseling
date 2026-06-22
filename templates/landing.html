@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block title %}Home - AI Career Counselor{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center min-vh-75">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold">
+                    <span class="gradient-text">Find Your Dream Career</span>
+                    <br>with AI Guidance
+                </h1>
+                <p class="lead text-muted mt-3">
+                    Discover personalized career paths based on your skills, 
+                    education, and interests using advanced AI technology.
+                </p>
+                <div class="mt-4">
+                    <a href="{{ url_for('register') if not session.user_id else url_for('dashboard') }}" 
+                       class="btn btn-primary btn-lg me-3">
+                        <i class="fas fa-rocket"></i> Get Started
+                    </a>
+                    <a href="#features" class="btn btn-outline-secondary btn-lg">
+                        Learn More
+                    </a>
+                </div>
+                <div class="mt-4">
+                    <span class="badge bg-success me-2">AI Powered</span>
+                    <span class="badge bg-info me-2">Free</span>
+                    <span class="badge bg-warning">For Rural Youth</span>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <img src="{{ url_for('static', filename='images/hero-illustration.svg') }}" 
+                     alt="Career Counseling" class="img-fluid" 
+                     onerror="this.src='https://via.placeholder.com/500x400/667eea/ffffff?text=Career+AI'">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section id="features" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center fw-bold mb-5">Why Choose CareerAI?</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 text-center p-4">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot fa-3x text-primary"></i>
+                    </div>
+                    <h5 class="mt-3">AI-Powered Matching</h5>
+                    <p class="text-muted">Smart algorithm matches your skills with the best career paths</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 text-center p-4">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap fa-3x text-primary"></i>
+                    </div>
+                    <h5 class="mt-3">Government Schemes</h5>
+                    <p class="text-muted">Discover relevant government programs and training opportunities</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 text-center p-4">
+                    <div class="feature-icon">
+                        <i class="fas fa-language fa-3x text-primary"></i>
+                    </div>
+                    <h5 class="mt-3">Multi-Language Support</h5>
+                    <p class="text-muted">Available in English and Hindi with voice assistance</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-3">
+                <h2 class="fw-bold text-primary">170+</h2>
+                <p class="text-muted">Career Paths</p>
+            </div>
+            <div class="col-md-3">
+                <h2 class="fw-bold text-primary">50+</h2>
+                <p class="text-muted">Government Schemes</p>
+            </div>
+            <div class="col-md-3">
+                <h2 class="fw-bold text-primary">1000+</h2>
+                <p class="text-muted">Users Served</p>
+            </div>
+            <div class="col-md-3">
+                <h2 class="fw-bold text-primary">95%</h2>
+                <p class="text-muted">Satisfaction Rate</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5 bg-primary text-white">
+    <div class="container text-center">
+        <h2 class="fw-bold">Ready to Start Your Career Journey?</h2>
+        <p class="lead">Join thousands of users who found their dream career with CareerAI</p>
+        <a href="{{ url_for('register') if not session.user_id else url_for('dashboard') }}" 
+           class="btn btn-light btn-lg mt-3">
+            <i class="fas fa-user-plus"></i> Create Free Account
+        </a>
+    </div>
+</section>
+
+<style>
+    .min-vh-75 { min-height: 75vh; }
+    .gradient-text {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .feature-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto;
+        background: rgba(102, 126, 234, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .hero-section {
+        background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
+    }
+</style>
+{% endblock %}

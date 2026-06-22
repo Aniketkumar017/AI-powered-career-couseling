@@ -1,0 +1,1291 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - CareerAI{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Dashboard Styles */
+    .dashboard-hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 20px;
+        padding: 40px;
+        color: white;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .dashboard-hero::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -20%;
+        width: 400px;
+        height: 400px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+    }
+    
+    .dashboard-hero::after {
+        content: '';
+        position: absolute;
+        bottom: -30%;
+        left: -10%;
+        width: 300px;
+        height: 300px;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 50%;
+    }
+    
+    .dashboard-hero .hero-content {
+        position: relative;
+        z-index: 1;
+    }
+    
+    .stat-card {
+        background: white;
+        border-radius: 16px;
+        padding: 24px;
+        text-align: center;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(0,0,0,0.05);
+        cursor: pointer;
+    }
+    
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    }
+    
+    .stat-card .stat-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 15px;
+        font-size: 24px;
+    }
+    
+    .stat-card .stat-number {
+        font-size: 32px;
+        font-weight: 700;
+        color: #333;
+    }
+    
+    .stat-card .stat-label {
+        color: #666;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+    
+    .search-section {
+        background: white;
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    
+    .search-section .section-title {
+        font-size: 20px;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 20px;
+    }
+    
+    .search-section .section-title i {
+        color: #667eea;
+        margin-right: 10px;
+    }
+    
+    .form-control-custom {
+        border: 2px solid #e8ecf1;
+        border-radius: 12px;
+        padding: 14px 18px;
+        font-size: 15px;
+        transition: all 0.3s ease;
+        width: 100%;
+    }
+    
+    .form-control-custom:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        outline: none;
+    }
+    
+    .form-select-custom {
+        border: 2px solid #e8ecf1;
+        border-radius: 12px;
+        padding: 14px 18px;
+        font-size: 15px;
+        transition: all 0.3s ease;
+        width: 100%;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 15px center;
+        background-size: 12px;
+    }
+    
+    .form-select-custom:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        outline: none;
+    }
+    
+    .btn-search {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border: none;
+        padding: 14px 30px;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        width: 100%;
+        cursor: pointer;
+    }
+    
+    .btn-search:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        color: white;
+    }
+    
+    .btn-search:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+    }
+    
+    .quick-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 15px;
+    }
+    
+    .quick-tag {
+        background: #f0f2f8;
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-size: 13px;
+        color: #555;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: none;
+    }
+    
+    .quick-tag:hover {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    }
+    
+    .result-card {
+        background: white;
+        border-radius: 16px;
+        padding: 20px;
+        transition: all 0.3s ease;
+        border: 1px solid #e8ecf1;
+        height: 100%;
+    }
+    
+    .result-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        border-color: #667eea;
+    }
+    
+    .result-card .job-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 8px;
+    }
+    
+    .result-card .match-badge {
+        display: inline-block;
+        padding: 4px 14px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+    
+    .result-card .match-badge.high {
+        background: #e8f5e9;
+        color: #2e7d32;
+    }
+    
+    .result-card .match-badge.medium {
+        background: #fff3e0;
+        color: #e65100;
+    }
+    
+    .result-card .match-badge.low {
+        background: #fce4ec;
+        color: #c62828;
+    }
+    
+    .result-card .skills-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin: 10px 0;
+    }
+    
+    .result-card .skills-tag {
+        background: #f0f2f8;
+        padding: 3px 12px;
+        border-radius: 12px;
+        font-size: 11px;
+        color: #666;
+    }
+    
+    .progress-custom {
+        height: 6px;
+        border-radius: 10px;
+        background: #f0f2f8;
+        overflow: hidden;
+        margin: 10px 0;
+    }
+    
+    .progress-custom .progress-bar-custom {
+        height: 100%;
+        border-radius: 10px;
+        background: linear-gradient(90deg, #667eea, #764ba2);
+        transition: width 1s ease;
+    }
+    
+    .loading-spinner {
+        display: none;
+        text-align: center;
+        padding: 40px;
+    }
+    
+    .loading-spinner .spinner {
+        width: 50px;
+        height: 50px;
+        border: 4px solid #f0f2f8;
+        border-top: 4px solid #667eea;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto;
+    }
+    
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    
+    .no-results {
+        text-align: center;
+        padding: 60px 20px;
+        background: white;
+        border-radius: 16px;
+        border: 1px solid #e8ecf1;
+    }
+    
+    .no-results i {
+        font-size: 60px;
+        color: #d0d5e0;
+        margin-bottom: 20px;
+    }
+    
+    .no-results h5 {
+        color: #333;
+        margin-bottom: 10px;
+    }
+    
+    .no-results p {
+        color: #999;
+    }
+    
+    .recent-history-item {
+        background: #f8f9ff;
+        border-radius: 12px;
+        padding: 15px 20px;
+        transition: all 0.3s ease;
+        border-left: 4px solid #667eea;
+    }
+    
+    .recent-history-item:hover {
+        background: #f0f2ff;
+    }
+    
+    .recent-history-item .history-date {
+        font-size: 12px;
+        color: #999;
+    }
+    
+    .recent-history-item .history-skills {
+        font-weight: 600;
+        color: #333;
+    }
+    
+    .recent-history-item .history-meta {
+        color: #666;
+        font-size: 13px;
+    }
+    
+    .category-card {
+        background: white;
+        border-radius: 16px;
+        padding: 20px;
+        text-align: center;
+        transition: all 0.3s ease;
+        border: 1px solid #e8ecf1;
+        cursor: pointer;
+    }
+    
+    .category-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        border-color: #667eea;
+    }
+    
+    .category-card .category-icon {
+        font-size: 32px;
+        margin-bottom: 10px;
+    }
+    
+    .category-card .category-name {
+        font-weight: 600;
+        color: #333;
+    }
+    
+    .category-card .category-desc {
+        font-size: 12px;
+        color: #999;
+        margin-top: 5px;
+    }
+    
+    .notification-toast {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: white;
+        padding: 16px 24px;
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        z-index: 9999;
+        max-width: 400px;
+        border-left: 4px solid #667eea;
+    }
+    
+    .notification-toast.success {
+        border-left-color: #4caf50;
+    }
+    .notification-toast.danger {
+        border-left-color: #f44336;
+    }
+    .notification-toast.warning {
+        border-left-color: #ff9800;
+    }
+    
+    /* Voice Controls */
+    .voice-controls {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: white;
+        border-radius: 50px;
+        padding: 8px 20px;
+        display: flex;
+        gap: 10px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        z-index: 1000;
+        border: 1px solid #e8ecf1;
+    }
+    
+    .language-selector {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+    
+    .language-selector label {
+        cursor: pointer;
+        font-size: 12px;
+        color: #555;
+        margin: 0;
+    }
+    
+    .language-selector input[type="radio"] {
+        accent-color: #667eea;
+        cursor: pointer;
+    }
+    
+    .voice-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: none;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+    }
+    
+    .voice-btn:hover {
+        transform: scale(1.05);
+    }
+    
+    .voice-btn.speaking {
+        animation: pulse 1s infinite;
+        background: #ff5722;
+    }
+    
+    .voice-btn.stop-btn {
+        background: #f0f0f0;
+        color: #555;
+    }
+    
+    .voice-btn.stop-btn:hover {
+        background: #ddd;
+    }
+    
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+    
+    @keyframes slideIn {
+        from { opacity: 0; transform: translateX(100px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+    
+    @keyframes fadeOut {
+        from { opacity: 1; transform: translateX(0); }
+        to { opacity: 0; transform: translateX(100px); }
+    }
+    
+    .fade-in {
+        animation: fadeIn 0.6s ease forwards;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .slide-in {
+        animation: slideIn 0.5s ease forwards;
+    }
+    
+    @keyframes slideIn {
+        from { opacity: 0; transform: translateX(-20px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+    
+    @media (max-width: 768px) {
+        .dashboard-hero {
+            padding: 25px;
+        }
+        .stat-card .stat-number {
+            font-size: 24px;
+        }
+        .search-section {
+            padding: 20px;
+        }
+        .voice-controls {
+            bottom: 15px;
+            right: 15px;
+            padding: 6px 12px;
+        }
+        .voice-btn {
+            width: 32px;
+            height: 32px;
+            font-size: 13px;
+        }
+        .language-selector label {
+            font-size: 10px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <!-- Hero Section -->
+    <div class="dashboard-hero mb-4">
+        <div class="hero-content">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1 class="display-5 fw-bold mb-2">
+                        Welcome back, {{ user.full_name or user.username }}! 👋
+                    </h1>
+                    <p class="lead mb-0 opacity-90">
+                        Discover your perfect career path with AI-powered guidance
+                    </p>
+                </div>
+                <div class="col-lg-4 text-end d-none d-lg-block">
+                    <i class="fas fa-rocket fa-3x opacity-50"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Row -->
+    <div class="row g-4 mb-4">
+        <div class="col-md-4">
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(135deg, #667eea20, #764ba220); color: #667eea;">
+                    <i class="fas fa-bookmark"></i>
+                </div>
+                <div class="stat-number">{{ saved_count }}</div>
+                <div class="stat-label">Saved Careers</div>
+                <a href="{{ url_for('saved_careers') }}" class="btn btn-sm btn-outline-primary mt-2">
+                    View All <i class="fas fa-arrow-right ms-1"></i>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(135deg, #4caf5020, #66bb6a20); color: #4caf50;">
+                    <i class="fas fa-history"></i>
+                </div>
+                <div class="stat-number">{{ history_count }}</div>
+                <div class="stat-label">Past Searches</div>
+                <button class="btn btn-sm btn-outline-success mt-2" onclick="showHistory()">
+                    View History <i class="fas fa-arrow-right ms-1"></i>
+                </button>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(135deg, #ff980020, #ffa72620); color: #ff9800;">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="stat-number">170+</div>
+                <div class="stat-label">Career Paths</div>
+                <button class="btn btn-sm btn-outline-warning mt-2" onclick="exploreCareers()">
+                    Explore <i class="fas fa-arrow-right ms-1"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Category Cards -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-3 col-6">
+            <div class="category-card" onclick="quickSearch('farming, agriculture')">
+                <div class="category-icon">🌾</div>
+                <div class="category-name">Agriculture</div>
+                <div class="category-desc">Farming & Agri-tech</div>
+            </div>
+        </div>
+        <div class="col-md-3 col-6">
+            <div class="category-card" onclick="quickSearch('computer, coding, programming')">
+                <div class="category-icon">💻</div>
+                <div class="category-name">Technology</div>
+                <div class="category-desc">IT & Programming</div>
+            </div>
+        </div>
+        <div class="col-md-3 col-6">
+            <div class="category-card" onclick="quickSearch('healthcare, nursing')">
+                <div class="category-icon">🏥</div>
+                <div class="category-name">Healthcare</div>
+                <div class="category-desc">Medical & Nursing</div>
+            </div>
+        </div>
+        <div class="col-md-3 col-6">
+            <div class="category-card" onclick="quickSearch('teaching, communication')">
+                <div class="category-icon">📚</div>
+                <div class="category-name">Education</div>
+                <div class="category-desc">Teaching & Training</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Section -->
+    <div class="search-section mb-4" id="searchSection">
+        <div class="section-title">
+            <i class="fas fa-clipboard-list"></i>
+            Career Assessment
+        </div>
+        
+        <form id="quickSearchForm">
+            <div class="form-group mb-3">
+                <label class="form-label">Your Skills & Interests</label>
+                <input type="text" id="searchSkills" class="form-control-custom" 
+                       placeholder="e.g., programming, python, web development" 
+                       value="{{ search_skills or '' }}" required>
+                <small style="color: #999; font-size: 11px;">Separate skills with commas</small>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Education Level</label>
+                    <select id="searchEducation" class="form-select-custom" required>
+                        <option value="">Select</option>
+                        <option value="8th_pass" {% if search_education == '8th_pass' %}selected{% endif %}>8th Pass</option>
+                        <option value="10th_pass" {% if search_education == '10th_pass' %}selected{% endif %}>10th Pass</option>
+                        <option value="12th_pass" {% if search_education == '12th_pass' %}selected{% endif %}>12th Pass</option>
+                        <option value="graduate" {% if search_education == 'graduate' %}selected{% endif %}>Graduate</option>
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Location</label>
+                    <select id="searchLocation" class="form-select-custom" required>
+                        <option value="">Select</option>
+                        <option value="Rajasthan" {% if search_location == 'Rajasthan' %}selected{% endif %}>Rajasthan</option>
+                        <option value="Uttar Pradesh" {% if search_location == 'Uttar Pradesh' %}selected{% endif %}>Uttar Pradesh</option>
+                        <option value="Bihar" {% if search_location == 'Bihar' %}selected{% endif %}>Bihar</option>
+                        <option value="Maharashtra" {% if search_location == 'Maharashtra' %}selected{% endif %}>Maharashtra</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn-search" id="searchBtn">
+                <i class="fas fa-search"></i> Find My Career Path
+            </button>
+        </form>
+        
+    </div>
+
+    <!-- Loading Spinner -->
+    <div class="loading-spinner" id="loadingSpinner">
+        <div class="spinner"></div>
+        <p style="margin-top: 15px; color: #667eea;">Analyzing your profile...</p>
+    </div>
+
+    <!-- Results Container -->
+    <div id="searchResults"></div>
+
+    <!-- Recent History -->
+    {% if history %}
+    <div class="mt-4" id="historySection">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="fw-bold"><i class="fas fa-clock text-primary"></i> Recent Searches</h5>
+            <button class="btn btn-sm btn-outline-secondary" onclick="toggleHistory()">
+                <i class="fas fa-chevron-up" id="historyToggle"></i>
+            </button>
+        </div>
+        <div id="historyContent">
+            <div class="row g-3">
+                {% for item in history[:3] %}
+                <div class="col-md-4">
+                    <div class="recent-history-item">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <div class="history-skills">{{ item.skills[:30] }}{% if item.skills|length > 30 %}...{% endif %}</div>
+                                <div class="history-meta">{{ item.education|replace('_', ' ')|title }}, {{ item.location }}</div>
+                            </div>
+                            <span class="history-date">{{ item.created_at[:10] }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<!-- ============================================ -->
+<!-- VOICE CONTROLS -->
+<!-- ============================================ -->
+<div class="voice-controls">
+    <div class="language-selector">
+        <input type="radio" name="languageOption" id="englishOption" value="en" checked>
+        <label for="englishOption">EN</label>
+        <input type="radio" name="languageOption" id="hindiOption" value="hi">
+        <label for="hindiOption">हिंदी</label>
+    </div>
+    <button id="speakBtn" class="voice-btn" title="Click to listen">
+        <i class="fas fa-volume-up"></i>
+    </button>
+    <button id="stopBtn" class="voice-btn stop-btn" title="Stop speaking">
+        <i class="fas fa-stop"></i>
+    </button>
+</div>
+
+<audio id="audioPlayer" style="display: none;"></audio>
+
+<script>
+// ============================================
+// VOICE / TEXT-TO-SPEECH FUNCTIONALITY
+// ============================================
+
+var hindiTexts = {
+    welcome: "एआई करियर काउंसलर में आपका स्वागत है। कृपया अपने कौशल और शिक्षा की जानकारी भरें।",
+    fillForm: "कृपया अपने कौशल और शिक्षा की जानकारी भरें। सुझाव पाने के लिए फॉर्म भरें।",
+    analyzing: "आपकी प्रोफाइल का विश्लेषण किया जा रहा है। कृपया प्रतीक्षा करें।",
+    found: "करियर विकल्प मिले।",
+    noResults: "कोई करियर विकल्प नहीं मिला। कृपया अलग कौशल आज़माएं।",
+    saved: "सेव किया गया।",
+    alreadySaved: "पहले से सेव है।",
+    backendError: "बैकेंड कनेक्ट नहीं है। कृपया फ्लास्क सर्वर शुरू करें।",
+    fillAllFields: "कृपया सभी फ़ील्ड भरें।"
+};
+
+var englishTexts = {
+    welcome: "Welcome to AI Career Counselor. Please fill in your skills and education details.",
+    fillForm: "Please fill in your skills and education details. Click find my career path to get recommendations.",
+    analyzing: "Analyzing your profile. Please wait.",
+    found: "career recommendations found.",
+    noResults: "No career recommendations found. Please try different skills.",
+    saved: "has been saved to your list.",
+    alreadySaved: "is already in your saved list.",
+    backendError: "Backend not connected. Please start the Flask server.",
+    fillAllFields: "Please fill all fields before submitting."
+};
+
+var currentAudio = null;
+var isPlaying = false;
+
+function playAudio(base64Audio, contentType) {
+    contentType = contentType || 'audio/mpeg';
+    try {
+        if (currentAudio) {
+            currentAudio.pause();
+            currentAudio = null;
+        }
+        
+        var audio = document.getElementById('audioPlayer');
+        var blob = base64ToBlob(base64Audio, contentType);
+        var url = URL.createObjectURL(blob);
+        
+        audio.src = url;
+        audio.play();
+        
+        audio.onplay = function() {
+            isPlaying = true;
+            document.getElementById('speakBtn').classList.add('speaking');
+        };
+        
+        audio.onended = function() {
+            isPlaying = false;
+            document.getElementById('speakBtn').classList.remove('speaking');
+            URL.revokeObjectURL(url);
+        };
+        
+        audio.onerror = function() {
+            isPlaying = false;
+            document.getElementById('speakBtn').classList.remove('speaking');
+            console.error('Audio playback error');
+        };
+        
+        currentAudio = audio;
+    } catch (error) {
+        console.error('Play audio error:', error);
+    }
+}
+
+function base64ToBlob(base64, contentType) {
+    var byteCharacters = atob(base64);
+    var byteNumbers = new Array(byteCharacters.length);
+    for (var i = 0; i < byteCharacters.length; i++) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    var byteArray = new Uint8Array(byteNumbers);
+    return new Blob([byteArray], { type: contentType });
+}
+
+async function speakText(text, lang) {
+    lang = lang || 'en';
+    try {
+        var endpoint = lang === 'hi' ? '/api/tts/hindi' : '/api/tts/english';
+        
+        var response = await fetch(window.location.origin + endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text: text })
+        });
+        
+        if (response.ok) {
+            var data = await response.json();
+            if (data.success && data.audio) {
+                playAudio(data.audio, data.content_type);
+            } else {
+                console.error('TTS failed:', data.error);
+                fallbackSpeak(text, lang);
+            }
+        } else {
+            console.error('TTS API error:', response.status);
+            fallbackSpeak(text, lang);
+        }
+    } catch (error) {
+        console.error('Speak error:', error);
+        fallbackSpeak(text, lang);
+    }
+}
+
+function fallbackSpeak(text, lang) {
+    if (!window.speechSynthesis) {
+        console.warn('Speech synthesis not supported');
+        return;
+    }
+    
+    var utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = lang === 'hi' ? 'hi-IN' : 'en-US';
+    utterance.rate = 0.9;
+    
+    utterance.onstart = function() {
+        document.getElementById('speakBtn').classList.add('speaking');
+    };
+    
+    utterance.onend = function() {
+        document.getElementById('speakBtn').classList.remove('speaking');
+    };
+    
+    window.speechSynthesis.speak(utterance);
+}
+
+async function readFormFields() {
+    var skills = document.getElementById('searchSkills').value || 'not filled';
+    var educationSelect = document.getElementById('searchEducation');
+    var education = educationSelect.options[educationSelect.selectedIndex]?.text || 'not selected';
+    var locationSelect = document.getElementById('searchLocation');
+    var location = locationSelect.options[locationSelect.selectedIndex]?.text || 'not selected';
+    var selectedLang = document.querySelector('input[name="languageOption"]:checked').value;
+    
+    if (selectedLang === 'hi') {
+        var educationHindi = '';
+        if (education === '8th Pass') educationHindi = 'आठवीं पास';
+        else if (education === '10th Pass') educationHindi = 'दसवीं पास';
+        else if (education === '12th Pass') educationHindi = 'बारहवीं पास';
+        else if (education === 'Graduate') educationHindi = 'स्नातक';
+        else educationHindi = education;
+        
+        var text = 'आपके कौशल हैं: ' + skills + '. शिक्षा स्तर: ' + educationHindi + '. स्थान: ' + location + '.';
+        await speakText(text, 'hi');
+    } else {
+        var text = 'Your skills are ' + skills + '. Education level is ' + education + '. Location is ' + location + '.';
+        await speakText(text, 'en');
+    }
+}
+
+async function readResults() {
+    var careerCards = document.querySelectorAll('.result-card');
+    var selectedLang = document.querySelector('input[name="languageOption"]:checked').value;
+    
+    if (careerCards.length === 0) {
+        if (selectedLang === 'hi') {
+            await speakText(hindiTexts.noResults, 'hi');
+        } else {
+            await speakText(englishTexts.noResults, 'en');
+        }
+        return;
+    }
+    
+    if (selectedLang === 'hi') {
+        var text = careerCards.length + ' ' + hindiTexts.found + ' ';
+        for (var i = 0; i < Math.min(careerCards.length, 5); i++) {
+            var card = careerCards[i];
+            var title = card.querySelector('.job-title')?.textContent || 'अज्ञात';
+            var match = card.querySelector('.match-badge')?.textContent || '';
+            text += (i + 1) + '. ' + title + '. ' + match + '. ';
+        }
+        await speakText(text, 'hi');
+    } else {
+        var text = 'Found ' + careerCards.length + ' ' + englishTexts.found + ' ';
+        for (var i = 0; i < Math.min(careerCards.length, 5); i++) {
+            var card = careerCards[i];
+            var title = card.querySelector('.job-title')?.textContent || 'Unknown';
+            var match = card.querySelector('.match-badge')?.textContent || '';
+            text += (i + 1) + '. ' + title + '. ' + match + '. ';
+        }
+        await speakText(text, 'en');
+    }
+}
+
+async function speakBasedOnLanguage() {
+    var resultsSection = document.getElementById('searchResults');
+    var selectedLang = document.querySelector('input[name="languageOption"]:checked').value;
+    
+    if (resultsSection.innerHTML.trim() !== '') {
+        await readResults();
+    } else {
+        if (selectedLang === 'hi') {
+            await speakText(hindiTexts.fillForm, 'hi');
+        } else {
+            await speakText(englishTexts.fillForm, 'en');
+        }
+    }
+}
+
+// ============================================
+// DASHBOARD FUNCTIONALITY
+// ============================================
+
+var searchSkills = "{{ search_skills or '' }}";
+var searchEducation = "{{ search_education or '' }}";
+var searchLocation = "{{ search_location or '' }}";
+
+document.addEventListener('DOMContentLoaded', function() {
+    if (searchSkills && searchEducation && searchLocation) {
+        setTimeout(function() {
+            document.getElementById('quickSearchForm').dispatchEvent(new Event('submit'));
+        }, 500);
+    }
+
+    // Voice Controls
+    document.getElementById('speakBtn').addEventListener('click', function() {
+        speakBasedOnLanguage();
+    });
+    
+    document.getElementById('stopBtn').addEventListener('click', function() {
+        if (currentAudio) {
+            currentAudio.pause();
+            currentAudio = null;
+            isPlaying = false;
+            document.getElementById('speakBtn').classList.remove('speaking');
+            showNotification('Voice stopped', 'info');
+        }
+        if (window.speechSynthesis) {
+            window.speechSynthesis.cancel();
+        }
+    });
+    
+    document.querySelectorAll('input[name="languageOption"]').forEach(function(radio) {
+        radio.addEventListener('change', function(e) {
+            if (e.target.value === 'hi') {
+                speakText(hindiTexts.welcome, 'hi');
+            } else {
+                speakText(englishTexts.welcome, 'en');
+            }
+        });
+    });
+});
+
+function quickSearch(skills) {
+    document.getElementById('searchSkills').value = skills;
+    document.getElementById('quickSearchForm').dispatchEvent(new Event('submit'));
+}
+
+// Quick tag buttons
+document.querySelectorAll('.quick-tag').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+        document.getElementById('searchSkills').value = this.dataset.skills;
+        document.getElementById('quickSearchForm').dispatchEvent(new Event('submit'));
+    });
+});
+
+// ============================================
+// FORM SUBMISSION - WITH VOICE
+// ============================================
+
+document.getElementById('quickSearchForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    var skills = document.getElementById('searchSkills').value.trim();
+    var education = document.getElementById('searchEducation').value;
+    var location = document.getElementById('searchLocation').value;
+    var selectedLang = document.querySelector('input[name="languageOption"]:checked').value;
+    
+    if (!skills || !education || !location) {
+        showNotification('Please fill all fields', 'warning');
+        if (selectedLang === 'hi') {
+            await speakText(hindiTexts.fillAllFields, 'hi');
+        } else {
+            await speakText(englishTexts.fillAllFields, 'en');
+        }
+        return;
+    }
+    
+    var resultsContainer = document.getElementById('searchResults');
+    var loadingSpinner = document.getElementById('loadingSpinner');
+    var searchBtn = document.getElementById('searchBtn');
+    
+    loadingSpinner.style.display = 'block';
+    resultsContainer.innerHTML = '';
+    searchBtn.disabled = true;
+    searchBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Searching...';
+    
+    if (selectedLang === 'hi') {
+        await speakText(hindiTexts.analyzing, 'hi');
+    } else {
+        await speakText(englishTexts.analyzing, 'en');
+    }
+    
+    try {
+        var response = await fetch('/api/careers/smart_recommend', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                skills: skills,
+                education: education,
+                location: location
+            })
+        });
+        
+        var data = await response.json();
+        
+        loadingSpinner.style.display = 'none';
+        searchBtn.disabled = false;
+        searchBtn.innerHTML = '<i class="fas fa-search"></i> Find My Career Path';
+        
+        if (data.success && data.data && data.data.length > 0) {
+            displayResults(data.data, data.fallback_used, data.message);
+            setTimeout(function() {
+                readResults();
+            }, 500);
+        } else {
+            displayNoResults(data.message || 'No careers found. Try different skills!');
+            if (selectedLang === 'hi') {
+                await speakText(hindiTexts.noResults, 'hi');
+            } else {
+                await speakText(englishTexts.noResults, 'en');
+            }
+        }
+    } catch (error) {
+        loadingSpinner.style.display = 'none';
+        searchBtn.disabled = false;
+        searchBtn.innerHTML = '<i class="fas fa-search"></i> Find My Career Path';
+        showNotification('Error: ' + error.message, 'danger');
+        console.error('Search error:', error);
+    }
+});
+
+// ============================================
+// DISPLAY RESULTS WITH BETTER AI SUGGESTIONS
+// ============================================
+
+function displayResults(careers, fallbackUsed, message) {
+    var container = document.getElementById('searchResults');
+    
+    var html = `
+        <div class="fade-in">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="fw-bold">
+                    <i class="fas fa-check-circle text-success"></i> 
+                    ${fallbackUsed ? '🤖 AI-Powered Career Suggestions' : '🎯 Recommended Careers'}
+                </h5>
+                <span class="badge bg-primary">${careers.length} results</span>
+            </div>
+    `;
+    
+    // Better AI Fallback Message
+    if (fallbackUsed) {
+        html += `
+            <div class="alert alert-info alert-dismissible fade show" role="alert" style="background: #e3f2fd; border-left: 4px solid #2196f3;">
+                <div class="d-flex align-items-start">
+                    <i class="fas fa-robot fa-2x me-3" style="color: #2196f3;"></i>
+                    <div>
+                        <strong style="font-size: 16px;">🤖 AI-Generated Suggestions</strong>
+                        <p class="mb-0 mt-1" style="font-size: 14px;">
+                            ${message || 'No exact matches found in our database. Here are some AI-generated career suggestions based on your skills!'}
+                        </p>
+                        <small class="text-muted">💡 These suggestions are generated by Google Gemini AI based on your skills and education.</small>
+                    </div>
+                    <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert" style="margin-left: 10px;"></button>
+                </div>
+            </div>
+        `;
+    } else {
+        if (message) {
+            html += `<p class="text-muted small">${message}</p>`;
+        }
+    }
+    
+    html += `<div class="row g-4">`;
+    
+    for (var i = 0; i < careers.length; i++) {
+        var career = careers[i];
+        var matchPercent = Math.round(career.match_percent || 70);
+        var matchClass = matchPercent >= 80 ? 'high' : (matchPercent >= 60 ? 'medium' : 'low');
+        var skills = career.required_skills ? career.required_skills.split(',').slice(0, 4) : ['General skills'];
+        var title = career.job_title || career.career || 'Career';
+        var salary = career.salary || career.salary_range || '₹10,000-20,000';
+        var training = career.training_duration || career.training_months || 6;
+        var source = career.source || 'ML Model';
+        var isGemini = career.is_gemini || false;
+        var sourceBadge = isGemini ? '🤖 AI' : '📊 ML';
+        var sourceColor = isGemini ? 'bg-info' : 'bg-primary';
+        var reason = career.reason || '';
+        
+        // Better reason display for AI suggestions
+        var reasonHtml = '';
+        if (reason) {
+            reasonHtml = `<p class="text-muted small mt-2"><i class="fas fa-lightbulb text-warning"></i> ${reason}</p>`;
+        }
+        
+        html += `
+            <div class="col-md-6 col-lg-4 slide-in" style="animation-delay: ${i * 0.1}s">
+                <div class="result-card">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div class="job-title">${title}</div>
+                        <span class="match-badge ${matchClass}">${matchPercent}%</span>
+                    </div>
+                    
+                    <div class="skills-tags">
+                        ${skills.map(function(s) { return '<span class="skills-tag">' + s.trim() + '</span>'; }).join('')}
+                    </div>
+                    
+                    ${reasonHtml}
+                    
+                    <div class="d-flex justify-content-between text-muted small mb-1">
+                        <span><i class="fas fa-money-bill"></i> ${salary}</span>
+                        <span><i class="fas fa-clock"></i> ${training} months</span>
+                    </div>
+                    
+                    <div class="progress-custom">
+                        <div class="progress-bar-custom" style="width: 0%" data-percent="${matchPercent}"></div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between align-items-center mt-2">
+                        <span class="badge ${sourceColor}">${sourceBadge} ${source}</span>
+                        <div class="d-flex gap-2">
+                            <a href="/career/${encodeURIComponent(title)}" class="btn btn-primary btn-sm">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <button onclick="saveCareerDirect('${title.replace(/'/g, "\\'")}')" class="btn btn-outline-success btn-sm">
+                                <i class="fas fa-bookmark"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+    
+    html += `
+            </div>
+        </div>
+    `;
+    
+    container.innerHTML = html;
+    
+    setTimeout(function() {
+        document.querySelectorAll('.progress-bar-custom').forEach(function(bar) {
+            var percent = bar.dataset.percent;
+            bar.style.width = percent + '%';
+        });
+    }, 300);
+}
+
+function displayNoResults(message) {
+    var container = document.getElementById('searchResults');
+    container.innerHTML = `
+        <div class="no-results fade-in">
+            <i class="fas fa-search"></i>
+            <h5>No careers found</h5>
+            <p>${message || 'Try different skills or education level to find more options'}</p>
+            <button class="btn btn-primary" onclick="resetSearch()">
+                <i class="fas fa-redo"></i> Try Again
+            </button>
+        </div>
+    `;
+}
+
+function resetSearch() {
+    document.getElementById('searchSkills').value = '';
+    document.getElementById('searchEducation').value = '';
+    document.getElementById('searchLocation').value = '';
+    document.getElementById('searchResults').innerHTML = '';
+}
+
+// ============================================
+// SAVE CAREER FUNCTION
+// ============================================
+
+function saveCareerDirect(title) {
+    var selectedLang = document.querySelector('input[name="languageOption"]:checked').value;
+    
+    fetch('/api/careers/save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            career_title: title,
+            career_data: { job_title: title }
+        })
+    })
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(data) {
+        if (data.success) {
+            showNotification('Career saved successfully!', 'success');
+            if (selectedLang === 'hi') {
+                speakText(title + ' ' + hindiTexts.saved, 'hi');
+            } else {
+                speakText(title + ' ' + englishTexts.saved, 'en');
+            }
+        } else {
+            showNotification('Error: ' + data.error, 'danger');
+        }
+    })
+    .catch(function(error) {
+        showNotification('Error saving career: ' + error.message, 'danger');
+    });
+}
+
+// ============================================
+// NOTIFICATION FUNCTION
+// ============================================
+
+function showNotification(message, type) {
+    type = type || 'info';
+    
+    var colors = {
+        success: '#4caf50',
+        danger: '#f44336',
+        warning: '#ff9800',
+        info: '#667eea'
+    };
+    
+    var icons = {
+        success: 'fa-check-circle',
+        danger: 'fa-exclamation-circle',
+        warning: 'fa-exclamation-triangle',
+        info: 'fa-info-circle'
+    };
+    
+    var notification = document.createElement('div');
+    notification.className = 'notification-toast ' + type;
+    notification.innerHTML = `
+        <div class="d-flex align-items-center">
+            <i class="fas ${icons[type]}" style="color: ${colors[type]}; font-size: 20px; margin-right: 12px;"></i>
+            <span style="flex: 1;">${message}</span>
+            <button onclick="this.parentElement.parentElement.remove()" style="background: none; border: none; color: #999; font-size: 18px; cursor: pointer;">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    `;
+    document.body.appendChild(notification);
+    
+    setTimeout(function() {
+        if (notification.parentElement) {
+            notification.style.animation = 'fadeOut 0.3s ease forwards';
+            setTimeout(function() {
+                if (notification.parentElement) {
+                    notification.remove();
+                }
+            }, 300);
+        }
+    }, 5000);
+}
+
+function showHistory() {
+    document.getElementById('historySection').scrollIntoView({ behavior: 'smooth' });
+}
+
+function toggleHistory() {
+    var content = document.getElementById('historyContent');
+    var toggle = document.getElementById('historyToggle');
+    if (content.style.display === 'none') {
+        content.style.display = 'block';
+        toggle.className = 'fas fa-chevron-up';
+    } else {
+        content.style.display = 'none';
+        toggle.className = 'fas fa-chevron-down';
+    }
+}
+
+function exploreCareers() {
+    document.getElementById('searchSection').scrollIntoView({ behavior: 'smooth' });
+}
+
+</script>
+
+{% endblock %}

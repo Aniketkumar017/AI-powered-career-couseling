@@ -1,21 +1,253 @@
 job_title,required_skills,salary,SDG_category,min_education,training_duration,pathway_steps,training_providers_link
-Software Developer,"programming, coding, python, java, problem solving","₹30,000 - ₹50,000",Industry Innovation,12th_pass,6,"Learn programming basics|Complete computer science course|Build projects|Apply for jobs",#
-Web Designer,"html, css, javascript, design, creativity","₹20,000 - ₹35,000",Industry Innovation,12th_pass,4,"Learn HTML/CSS|Learn JavaScript|Build portfolio|Get job",#
-Data Entry Operator,"typing, computer, ms office, excel","₹12,000 - ₹18,000",Decent Work,10th_pass,2,"Learn typing|Learn computer basics|Practice|Apply for jobs",#
-Digital Marketing,"social media, seo, content writing, marketing","₹18,000 - ₹30,000",Decent Work,12th_pass,3,"Learn digital marketing|Get certified|Build portfolio|Apply",#
-Computer Teacher,"computer, teaching, communication, patience","₹15,000 - ₹25,000",Quality Education,12th_pass,3,"Learn computer basics|Get teaching cert|Practice|Get job",#
-Agricultural Technician,"farming, agriculture, crops, irrigation","₹15,000 - ₹25,000",Zero Hunger,10th_pass,3,"Learn farming|Get training|Get certified|Start working",#
-Solar Panel Installer,"solar, electrical, technical, safety","₹18,000 - ₹30,000",Clean Energy,10th_pass,4,"Learn solar installation|Get certified|Apprenticeship|Start work",#
-Healthcare Assistant,"healthcare, caregiving, first aid, nursing","₹12,000 - ₹20,000",Good Health,12th_pass,6,"Learn healthcare basics|Get certified|Internship|Apply",#
-Electrician,"electrical, wiring, repair, maintenance","₹15,000 - ₹25,000",Clean Energy,10th_pass,6,"Complete ITI|Apprenticeship|Get license|Start work",#
-Plumber,"plumbing, pipes, repair, tools","₹12,000 - ₹22,000",Clean Water,8th_pass,4,"Learn plumbing|Apprenticeship|Get certified|Start work",#
-Mobile Repair,"mobile, repair, electronics, troubleshooting","₹12,000 - ₹20,000",Industry Innovation,10th_pass,3,"Learn mobile repair|Practice|Get certified|Open shop",#
-Tailoring,"sewing, stitching, design, creativity","₹10,000 - ₹18,000",Decent Work,8th_pass,6,"Learn tailoring|Apprenticeship|Build customers|Start shop",#
-Beautician,"beauty, makeup, skincare, customer service","₹10,000 - ₹18,000",Decent Work,10th_pass,6,"Learn beauty services|Practice|Get certified|Open salon",#
-Driver,"driving, navigation, customer service","₹10,000 - ₹18,000",Industry Innovation,8th_pass,2,"Get license|Learn navigation|Practice|Join transport",#
-Sales Executive,"sales, communication, marketing, customer service","₹12,000 - ₹25,000",Decent Work,12th_pass,3,"Learn sales skills|Practice|Build network|Apply for jobs",#
-Accountant,"accounting, tally, excel, finance","₹15,000 - ₹25,000",Decent Work,12th_pass,6,"Learn accounting|Learn Tally|Practice|Get job",#
-Graphic Designer,"design, photoshop, illustrator, creativity","₹18,000 - ₹30,000",Industry Innovation,12th_pass,6,"Learn design software|Build portfolio|Get certified|Apply",#
-Content Writer,"writing, english, grammar, creativity","₹15,000 - ₹25,000",Quality Education,12th_pass,3,"Learn writing|Build portfolio|Practice|Apply for jobs",#
-Customer Support,"communication, english, problem solving","₹12,000 - ₹20,000",Decent Work,12th_pass,2,"Learn communication|Learn CRM|Practice|Apply",#
-Business Development,"sales, marketing, communication, negotiation","₹20,000 - ₹35,000",Decent Work,graduate,6,"Learn sales|Build network|Practice|Apply for jobs",#
+
+# ============================================
+# 💻 TECHNOLOGY & IT
+# ============================================
+Software Developer,"programming, python, java, c++, problem solving, analytical thinking","₹30,000 - ₹60,000",Industry Innovation,12th_pass,6,"Learn programming basics|Master a programming language|Build projects|Apply for jobs|Start career",https://www.coursera.org
+Web Developer,"html, css, javascript, react, angular, web design","₹25,000 - ₹50,000",Industry Innovation,12th_pass,6,"Learn HTML/CSS|Learn JavaScript|Learn a framework|Build websites|Get job",https://www.freecodecamp.org
+Full Stack Developer,"html, css, javascript, python, react, node.js, mongodb, mysql","₹40,000 - ₹80,000",Industry Innovation,graduate,8,"Learn frontend|Learn backend|Learn databases|Build full projects|Apply for jobs",https://www.theodinproject.com
+Data Scientist,"python, statistics, machine learning, data visualization, sql","₹50,000 - ₹100,000",Industry Innovation,graduate,8,"Learn Python|Learn Statistics|Learn ML|Build projects|Apply for jobs",https://www.kaggle.com
+Data Analyst,"python, sql, excel, data visualization, statistics, tableau","₹30,000 - ₹55,000",Industry Innovation,graduate,6,"Learn Python|Learn SQL|Learn Excel|Build dashboards|Get job",https://www.datacamp.com
+Machine Learning Engineer,"python, deep learning, tensorflow, pytorch, nlp, computer vision","₹60,000 - ₹120,000",Industry Innovation,graduate,10,"Learn Python|Learn ML concepts|Learn Deep Learning|Build models|Apply for jobs",https://www.tensorflow.org
+AI Engineer,"python, machine learning, deep learning, nlp, computer vision, reinforcement learning","₹70,000 - ₹150,000",Industry Innovation,graduate,12,"Learn Python|Learn ML|Learn Deep Learning|Learn NLP/CV|Build AI projects|Apply",https://www.deeplearning.ai
+Cloud Engineer,"aws, azure, docker, kubernetes, linux, networking","₹45,000 - ₹90,000",Industry Innovation,graduate,8,"Learn Linux|Learn AWS|Learn Docker|Learn Kubernetes|Get certified|Apply",https://aws.amazon.com/training
+DevOps Engineer,"linux, docker, kubernetes, jenkins, git, aws, azure","₹50,000 - ₹100,000",Industry Innovation,graduate,8,"Learn Linux|Learn Docker|Learn Kubernetes|Learn Jenkins|Learn AWS|Apply",https://www.devops.com
+Cybersecurity Analyst,"networking, linux, python, security tools, risk management","₹40,000 - ₹80,000",Industry Innovation,graduate,8,"Learn Networking|Learn Linux|Learn Security tools|Get certified|Apply",https://www.cybrary.it
+Network Engineer,"networking, cisco, routing, switching, firewall, tcp/ip","₹35,000 - ₹65,000",Industry Innovation,12th_pass,6,"Learn Networking basics|Learn Cisco|Get CCNA|Practice|Get job",https://www.cisco.com
+Database Administrator,"sql, mysql, postgresql, mongodb, database management, backup","₹35,000 - ₹60,000",Industry Innovation,graduate,6,"Learn SQL|Learn database concepts|Learn backup/restore|Get certified|Apply",https://www.oracle.com
+System Administrator,"linux, windows, networking, virtualization, server management","₹30,000 - ₹55,000",Industry Innovation,12th_pass,6,"Learn Linux|Learn Windows|Learn Networking|Learn virtualization|Apply",https://www.redhat.com
+IT Support Specialist,"computer hardware, networking, troubleshooting, customer service","₹20,000 - ₹35,000",Industry Innovation,12th_pass,4,"Learn computer basics|Learn troubleshooting|Get certified|Apply",https://www.comptia.org
+Frontend Developer,"html, css, javascript, react, angular, vue.js, ui/ux","₹35,000 - ₹70,000",Industry Innovation,12th_pass,6,"Learn HTML/CSS|Learn JavaScript|Learn a framework|Build portfolio|Apply",https://www.frontendmentor.io
+Backend Developer,"python, java, node.js, php, sql, apis, microservices","₹40,000 - ₹75,000",Industry Innovation,graduate,6,"Learn a language|Learn databases|Learn APIs|Build backend|Apply",https://www.djangoproject.com
+Mobile Developer - Android,"java, kotlin, android studio, xml, firebase, mvvm","₹35,000 - ₹70,000",Industry Innovation,12th_pass,6,"Learn Java/Kotlin|Learn Android|Build apps|Publish apps|Apply",https://developer.android.com
+Mobile Developer - iOS,"swift, ios, xcode, ui kit, swift ui, core data","₹40,000 - ₹75,000",Industry Innovation,12th_pass,6,"Learn Swift|Learn iOS|Build apps|Publish apps|Apply",https://developer.apple.com
+Game Developer,"c++, unity, game design, 3d modeling, animation, physics","₹35,000 - ₹70,000",Industry Innovation,graduate,8,"Learn C++|Learn Unity|Learn game design|Build games|Apply",https://unity.com
+UI/UX Designer,"figma, adobe xd, sketch, user research, wireframing, prototyping","₹30,000 - ₹60,000",Industry Innovation,12th_pass,6,"Learn design principles|Learn tools|Build portfolio|Apply",https://www.figma.com
+QA Tester,"manual testing, automation testing, selenium, jira, bug tracking","₹25,000 - ₹45,000",Industry Innovation,12th_pass,4,"Learn testing basics|Learn automation|Learn tools|Get certified|Apply",https://www.selenium.dev
+Technical Writer,"writing, english, technical knowledge, documentation, communication","₹25,000 - ₹45,000",Quality Education,graduate,4,"Learn writing|Learn technical topics|Build portfolio|Apply",https://www.writethedocs.org
+
+# ============================================
+# 📊 BUSINESS & MANAGEMENT
+# ============================================
+Digital Marketing Specialist,"social media, seo, content marketing, google ads, analytics","₹25,000 - ₹50,000",Decent Work,12th_pass,4,"Learn SEO|Learn Social Media|Learn Ads|Learn Analytics|Get certified|Apply",https://learndigital.withgoogle.com
+SEO Specialist,"seo, content writing, keyword research, google analytics, semrush","₹25,000 - ₹45,000",Decent Work,12th_pass,4,"Learn SEO basics|Learn tools|Learn Analytics|Get certified|Apply",https://moz.com
+Social Media Manager,"social media, content creation, community management, canva, analytics","₹20,000 - ₹40,000",Decent Work,12th_pass,3,"Learn social media|Learn content creation|Learn analytics|Build portfolio|Apply",https://www.hootsuite.com
+Content Marketing Manager,"content writing, strategy, seo, social media, email marketing","₹30,000 - ₹55,000",Decent Work,graduate,4,"Learn content writing|Learn strategy|Learn SEO|Build portfolio|Apply",https://contentmarketinginstitute.com
+Sales Executive,"sales, communication, negotiation, customer service, b2b, b2c","₹20,000 - ₹40,000",Decent Work,12th_pass,3,"Learn sales techniques|Learn communication|Practice|Get job",https://www.salesforce.com
+Business Development Manager,"sales, marketing, communication, negotiation, business strategy","₹30,000 - ₹60,000",Decent Work,graduate,4,"Learn sales|Learn business strategy|Learn communication|Practice|Apply",https://www.businessdevelopment.com
+Marketing Manager,"marketing, brand management, digital marketing, leadership, strategy","₹40,000 - ₹80,000",Decent Work,graduate,6,"Learn marketing|Learn digital marketing|Learn leadership|Get MBA|Apply",https://www.cim.co.uk
+Product Manager,"product development, agile, scrum, market research, strategy","₹45,000 - ₹90,000",Industry Innovation,graduate,6,"Learn product management|Learn agile|Learn scrum|Get certified|Apply",https://www.pmi.org
+Project Manager,"project management, agile, scrum, leadership, communication","₹40,000 - ₹80,000",Industry Innovation,graduate,6,"Learn project management|Learn agile|Get PMP|Practice|Apply",https://www.pmi.org
+Operations Manager,"operations, supply chain, logistics, leadership, process improvement","₹35,000 - ₹70,000",Industry Innovation,graduate,6,"Learn operations|Learn supply chain|Learn leadership|Practice|Apply",https://www.apics.org
+Human Resources Manager,"hr, recruitment, employee relations, hr policies, leadership","₹30,000 - ₹60,000",Decent Work,graduate,6,"Learn HR basics|Learn recruitment|Learn labor laws|Get certified|Apply",https://www.shrm.org
+Recruiter,"recruitment, communication, sourcing, screening, interviewing","₹20,000 - ₹40,000",Decent Work,12th_pass,3,"Learn recruitment|Learn sourcing|Learn interviewing|Practice|Apply",https://www.linkedin.com
+Financial Analyst,"finance, accounting, excel, financial modeling, data analysis","₹35,000 - ₹65,000",Industry Innovation,graduate,6,"Learn finance|Learn Excel|Learn financial modeling|Get certified|Apply",https://www.cfainstitute.org
+Accountant,"accounting, tally, excel, gst, taxation, financial reporting","₹20,000 - ₹40,000",Decent Work,12th_pass,6,"Learn accounting|Learn Tally|Learn GST|Get certified|Apply",https://www.icai.org
+Chartered Accountant,"accounting, auditing, taxation, finance, gst, company law","₹50,000 - ₹100,000",Decent Work,graduate,36,"Complete CA Foundation|Complete CA Inter|Complete CA Final|Get articleship|Apply",https://www.icai.org
+Company Secretary,"company law, governance, compliance, board meetings, legal","₹40,000 - ₹80,000",Industry Innovation,graduate,24,"Complete CS Foundation|Complete CS Inter|Complete CS Final|Practice|Apply",https://www.icsi.edu
+Investment Banker,"finance, investment banking, excel, financial modeling, m&a","₹60,000 - ₹120,000",Industry Innovation,graduate,12,"Learn finance|Learn investment banking|Learn modeling|Get MBA|Apply",https://www.cfainstitute.org
+Management Consultant,"business strategy, problem solving, analytics, communication","₹50,000 - ₹100,000",Industry Innovation,graduate,8,"Learn business strategy|Learn problem solving|Get MBA|Practice|Apply",https://www.mckinsey.com
+
+# ============================================
+# 🏥 HEALTHCARE & MEDICAL
+# ============================================
+Doctor - MBBS,"medicine, diagnosis, treatment, patient care, empathy, communication","₹50,000 - ₹150,000",Good Health,graduate,60,"Complete MBBS|Complete Internship|Get License|Specialize|Practice",https://www.nmc.org.in
+Nurse,"nursing, patient care, medication, communication, empathy","₹25,000 - ₹50,000",Good Health,12th_pass,36,"Complete GNM/BSc Nursing|Get certified|Internship|Apply to hospitals",https://www.nursingworld.org
+Pharmacist,"pharmacy, medicine, patient counseling, communication, ethics","₹25,000 - ₹45,000",Good Health,12th_pass,24,"Complete BPharm/DPharm|Get certified|Internship|Apply to pharmacy",https://www.pci.nic.in
+Physiotherapist,"physiotherapy, patient care, exercise therapy, communication","₹30,000 - ₹55,000",Good Health,12th_pass,48,"Complete BPT|Get certified|Internship|Practice|Apply",https://www.wcpt.org
+Medical Lab Technician,"lab testing, pathology, equipment handling, biochemistry","₹20,000 - ₹35,000",Good Health,12th_pass,12,"Complete DMLT/BMLT|Get certified|Internship|Apply to labs",https://www.medlab.org
+Healthcare Assistant,"patient care, caregiving, basic nursing, first aid, empathy","₹15,000 - ₹25,000",Good Health,10th_pass,6,"Learn healthcare basics|Get certified|Internship|Apply",https://www.nhs.uk
+Radiology Technician,"radiology, x-ray, mri, ct scan, patient care, safety","₹25,000 - ₹45,000",Good Health,12th_pass,24,"Complete radiology course|Get certified|Internship|Apply",https://www.rsna.org
+Dentist - BDS,"dentistry, diagnosis, treatment, patient care, communication","₹40,000 - ₹100,000",Good Health,12th_pass,60,"Complete BDS|Get certified|Internship|Practice|Apply",https://www.dciindia.gov.in
+Ayurvedic Doctor,"ayurveda, diagnosis, herbal medicine, patient care","₹25,000 - ₹50,000",Good Health,12th_pass,66,"Complete BAMS|Get certified|Internship|Practice|Apply",https://www.ccimindia.org
+Homeopathic Doctor,"homeopathy, diagnosis, patient care, communication","₹20,000 - ₹40,000",Good Health,12th_pass,66,"Complete BHMS|Get certified|Internship|Practice|Apply",https://www.ccimindia.org
+Veterinarian,"veterinary medicine, diagnosis, animal care, surgery, empathy","₹30,000 - ₹60,000",Good Health,12th_pass,60,"Complete BVSc|Get certified|Internship|Practice|Apply",https://www.vci.nic.in
+Public Health Specialist,"public health, epidemiology, community health, research","₹40,000 - ₹70,000",Good Health,graduate,24,"Complete MPH|Learn public health|Research|Apply",https://www.who.int
+Health Educator,"health education, communication, community health, empathy","₹25,000 - ₹40,000",Good Health,graduate,12,"Learn health education|Learn communication|Internship|Apply",https://www.cdc.gov
+
+# ============================================
+# 📚 EDUCATION & TEACHING
+# ============================================
+School Teacher,"teaching, communication, patience, subject knowledge, creativity","₹25,000 - ₹45,000",Quality Education,12th_pass,12,"Complete B.Ed|Get certified|Student teaching|Apply to schools",https://www.ncte.gov.in
+Computer Teacher,"computers, teaching, communication, patience, programming basics","₹20,000 - ₹35,000",Quality Education,12th_pass,6,"Learn computer basics|Get teaching cert|Practice|Get job",https://www.ncte.gov.in
+College Professor,"teaching, research, communication, subject expertise, mentorship","₹40,000 - ₹80,000",Quality Education,graduate,36,"Complete UGC NET|Complete PhD|Research|Teaching|Apply to colleges",https://www.ugc.ac.in
+Online Tutor,"teaching, communication, subject knowledge, online tools, patience","₹20,000 - ₹40,000",Quality Education,12th_pass,4,"Learn online teaching|Build profile|Join platforms|Start teaching",https://www.udemy.com
+Education Consultant,"education, consultancy, counseling, communication, strategy","₹30,000 - ₹55,000",Quality Education,graduate,8,"Learn education|Learn counseling|Practice|Apply",https://www.education.gov.in
+Special Education Teacher,"special education, teaching, communication, empathy, patience","₹25,000 - ₹45,000",Quality Education,graduate,18,"Learn special education|Get certified|Internship|Apply",https://www.cbse.gov.in
+Early Childhood Educator,"child development, teaching, communication, creativity, empathy","₹20,000 - ₹35,000",Quality Education,12th_pass,12,"Learn early childhood education|Get certified|Practice|Apply",https://www.niepa.ac.in
+Corporate Trainer,"training, communication, leadership, presentation, subject expertise","₹30,000 - ₹60,000",Quality Education,graduate,6,"Learn training skills|Learn communication|Practice|Apply",https://www.trainingindustry.com
+
+# ============================================
+# 🌾 AGRICULTURE & FARMING
+# ============================================
+Agricultural Scientist,"agriculture, research, crop science, soil science, genetics","₹40,000 - ₹70,000",Zero Hunger,graduate,24,"Learn agriculture|Learn research|Get certified|Research|Apply",https://www.icar.org.in
+Agricultural Technician,"farming, agriculture, crop management, irrigation, soil science","₹20,000 - ₹35,000",Zero Hunger,10th_pass,6,"Learn farming techniques|Get training|Get certified|Start working",https://www.agriculture.gov.in
+Farm Manager,"farm management, agriculture, crop planning, irrigation, business","₹25,000 - ₹45,000",Zero Hunger,12th_pass,12,"Learn farming|Learn management|Practice|Apply",https://www.agriculture.gov.in
+Horticulturist,"horticulture, gardening, landscaping, plant care, irrigation","₹25,000 - ₹45,000",Zero Hunger,12th_pass,12,"Learn horticulture|Learn landscaping|Get certified|Apply",https://www.icar.org.in
+Agronomist,"agronomy, crop science, soil science, irrigation, research","₹30,000 - ₹55,000",Zero Hunger,graduate,18,"Learn agronomy|Learn crop science|Get certified|Research|Apply",https://www.icar.org.in
+Soil Scientist,"soil science, agriculture, research, lab testing, analysis","₹30,000 - ₹55,000",Zero Hunger,graduate,18,"Learn soil science|Learn lab testing|Get certified|Research|Apply",https://www.icar.org.in
+Organic Farming Expert,"organic farming, sustainable agriculture, crop planning, marketing","₹25,000 - ₹45,000",Zero Hunger,12th_pass,12,"Learn organic farming|Get certified|Practice|Market produce",https://www.organicfarming.org
+Fishery Manager,"fishery, aquaculture, fish farming, business, management","₹25,000 - ₹45,000",Zero Hunger,12th_pass,12,"Learn fishery|Learn aquaculture|Get certified|Practice|Apply",https://www.fisheries.gov.in
+Poultry Manager,"poultry, farming, animal care, business, management","₹20,000 - ₹40,000",Zero Hunger,12th_pass,12,"Learn poultry farming|Get certified|Practice|Apply",https://www.poultryindia.com
+Dairy Manager,"dairy, animal care, milk production, business, management","₹25,000 - ₹45,000",Zero Hunger,12th_pass,12,"Learn dairy farming|Get certified|Practice|Apply",https://www.dairymonitor.com
+
+# ============================================
+# 🔧 TRADES & TECHNICAL
+# ============================================
+Electrician,"electrical, wiring, repair, maintenance, safety","₹15,000 - ₹25,000",Clean Energy,10th_pass,6,"Complete ITI Electrical|Apprenticeship|Get license|Start work",https://www.iti.gov.in
+Plumber,"plumbing, pipes, repair, tools, maintenance","₹12,000 - ₹22,000",Clean Water,8th_pass,4,"Learn plumbing|Apprenticeship|Get certified|Start work",https://www.iti.gov.in
+Welder,"welding, metal work, safety, tools, precision","₹15,000 - ₹25,000",Industry Innovation,10th_pass,6,"Complete ITI Welding|Apprenticeship|Get certified|Start work",https://www.iti.gov.in
+Carpenter,"woodworking, furniture, tools, design, measurement","₹12,000 - ₹22,000",Industry Innovation,8th_pass,6,"Learn carpentry|Apprenticeship|Practice|Start own workshop",https://www.iti.gov.in
+Mason,"construction, bricklaying, plastering, tools, safety","₹12,000 - ₹20,000",Industry Innovation,8th_pass,4,"Learn masonry|Apprenticeship|Practice|Start work",https://www.iti.gov.in
+Painter,"painting, tools, color mixing, surface preparation, safety","₹10,000 - ₹18,000",Industry Innovation,8th_pass,4,"Learn painting|Apprenticeship|Practice|Start own business",https://www.iti.gov.in
+Automobile Mechanic,"automobile, repair, maintenance, diagnostics, tools","₹15,000 - ₹25,000",Industry Innovation,10th_pass,12,"Complete ITI Automobile|Apprenticeship|Get certified|Start work",https://www.iti.gov.in
+AC Repair Technician,"ac, repair, maintenance, refrigeration, tools, safety","₹15,000 - ₹25,000",Industry Innovation,10th_pass,6,"Learn AC repair|Apprenticeship|Get certified|Start work",https://www.iti.gov.in
+Laptop/Mobile Repair Technician,"electronics, mobile, laptop, repair, troubleshooting","₹12,000 - ₹20,000",Industry Innovation,10th_pass,6,"Learn mobile repair|Learn laptop repair|Practice|Start shop",https://www.iti.gov.in
+Solar Panel Installer,"solar, electrical, technical, safety, installation","₹18,000 - ₹30,000",Clean Energy,10th_pass,6,"Learn solar installation|Get certified|Apprenticeship|Start work",https://www.mnre.gov.in
+TV/Refrigerator Repair,"electronics, tv, refrigerator, repair, troubleshooting","₹12,000 - ₹20,000",Industry Innovation,10th_pass,6,"Learn repair|Apprenticeship|Practice|Start shop",https://www.iti.gov.in
+CNC Operator,"cnc, machine operation, programming, precision, safety","₹18,000 - ₹30,000",Industry Innovation,12th_pass,12,"Learn CNC programming|Get certified|Apprenticeship|Apply",https://www.iti.gov.in
+3D Printer Technician,"3d printing, cad design, technical, maintenance, safety","₹20,000 - ₹35,000",Industry Innovation,12th_pass,8,"Learn 3D printing|Learn CAD|Practice|Apply",https://www.3dprinting.com
+
+# ============================================
+# 🎨 CREATIVE ARTS & DESIGN
+# ============================================
+Graphic Designer,"design, photoshop, illustrator, creativity, communication","₹20,000 - ₹40,000",Industry Innovation,12th_pass,6,"Learn design software|Build portfolio|Get certified|Apply",https://www.adobe.com
+UI/UX Designer,"design, user experience, figma, research, prototyping","₹30,000 - ₹60,000",Industry Innovation,12th_pass,8,"Learn UX design|Learn tools|Build portfolio|Apply",https://www.figma.com
+Web Designer,"html, css, javascript, design, creativity, responsiveness","₹20,000 - ₹35,000",Industry Innovation,12th_pass,6,"Learn HTML/CSS|Learn JavaScript|Learn design|Build portfolio|Apply",https://www.w3schools.com
+Video Editor,"video editing, adobe premiere, final cut, creativity, storytelling","₹20,000 - ₹40,000",Industry Innovation,12th_pass,6,"Learn video editing|Learn tools|Build portfolio|Apply",https://www.adobe.com
+Animator,"animation, 2d animation, 3d animation, creativity, storytelling","₹25,000 - ₹50,000",Industry Innovation,12th_pass,12,"Learn animation|Learn tools|Build portfolio|Apply",https://www.autodesk.com
+Fashion Designer,"fashion design, sewing, pattern making, creativity, trends","₹20,000 - ₹45,000",Industry Innovation,12th_pass,24,"Learn fashion design|Learn sewing|Build portfolio|Apply",https://www.nift.ac.in
+Interior Designer,"interior design, 3d modeling, creativity, client management","₹25,000 - ₹50,000",Industry Innovation,12th_pass,18,"Learn interior design|Learn 3D modeling|Build portfolio|Apply",https://www.nift.ac.in
+Photographer,"photography, lighting, composition, editing, creativity","₹20,000 - ₹40,000",Industry Innovation,12th_pass,6,"Learn photography|Learn editing|Build portfolio|Apply",https://www.nikon.com
+Content Creator,"content writing, video creation, social media, creativity","₹20,000 - ₹45,000",Decent Work,12th_pass,4,"Learn content creation|Build portfolio|Start channel|Monetize",https://www.youtube.com
+
+# ============================================
+# 📝 WRITING & CONTENT
+# ============================================
+Content Writer,"writing, english, grammar, creativity, research","₹18,000 - ₹35,000",Quality Education,12th_pass,4,"Learn writing|Build portfolio|Practice|Apply for jobs",https://www.grammarly.com
+Copywriter,"copywriting, marketing, creativity, persuasion, communication","₹25,000 - ₹50,000",Decent Work,12th_pass,4,"Learn copywriting|Build portfolio|Practice|Apply",https://www.copyblogger.com
+Technical Writer,"technical writing, english, communication, research, documentation","₹25,000 - ₹50,000",Quality Education,graduate,4,"Learn technical writing|Build portfolio|Practice|Apply",https://www.writethedocs.org
+Journalist,"journalism, writing, research, ethics, communication","₹20,000 - ₹40,000",Quality Education,graduate,6,"Learn journalism|Learn writing|Internship|Apply to newsrooms",https://www.presscouncil.nic.in
+Editor,"editing, proofreading, grammar, attention to detail, communication","₹25,000 - ₹45,000",Quality Education,graduate,4,"Learn editing|Build portfolio|Practice|Apply",https://www.ajeditor.com
+Screenwriter,"screenwriting, storytelling, creativity, dialog writing","₹25,000 - ₹60,000",Industry Innovation,graduate,12,"Learn screenwriting|Write scripts|Build portfolio|Apply",https://www.screenwriting.com
+Book Author,"writing, storytelling, creativity, research, communication","₹20,000 - ₹60,000",Quality Education,graduate,12,"Learn writing|Write book|Edit|Publish",https://www.penguin.co.in
+
+# ============================================
+# 🏢 GOVERNMENT & DEFENSE
+# ============================================
+Civil Services Officer,"administration, public service, leadership, communication","₹50,000 - ₹100,000",Industry Innovation,graduate,24,"Complete UPSC preparation|Clear UPSC|Training|Serve",https://www.upsc.gov.in
+Police Officer,"law enforcement, leadership, communication, physical fitness","₹35,000 - ₹70,000",Industry Innovation,graduate,12,"Complete preparation|Clear exams|Training|Serve",https://www.ssc.gov.in
+Defense Personnel - Army,"defense, physical fitness, leadership, patriotism","₹40,000 - ₹80,000",Industry Innovation,12th_pass,12,"Complete NDA preparation|Clear exams|Training|Serve",https://www.joinindianarmy.nic.in
+Defense Personnel - Navy,"defense, physical fitness, technical, leadership, patriotism","₹40,000 - ₹80,000",Industry Innovation,12th_pass,12,"Complete NDA preparation|Clear exams|Training|Serve",https://www.joinindiannavy.gov.in
+Defense Personnel - Air Force,"defense, physical fitness, technical, leadership, patriotism","₹40,000 - ₹80,000",Industry Innovation,12th_pass,12,"Complete NDA preparation|Clear exams|Training|Serve",https://www.afcat.cdac.in
+Fire Fighter,"fire fighting, emergency response, physical fitness, safety","₹25,000 - ₹45,000",Industry Innovation,10th_pass,6,"Learn fire fighting|Get certified|Training|Apply",https://www.ndrf.gov.in
+
+# ============================================
+# 🏨 HOSPITALITY & TOURISM
+# ============================================
+Hotel Manager,"hospitality, management, leadership, communication, customer service","₹30,000 - ₹60,000",Decent Work,12th_pass,24,"Complete hotel management|Learn leadership|Internship|Apply",https://www.ihm.gov.in
+Chef,"cooking, food preparation, creativity, management, hygiene","₹20,000 - ₹50,000",Decent Work,10th_pass,18,"Learn cooking|Complete hotel management|Internship|Apply",https://www.ihm.gov.in
+Tourism Manager,"tourism, management, communication, travel planning, marketing","₹25,000 - ₹50,000",Decent Work,12th_pass,12,"Learn tourism|Learn marketing|Internship|Apply",https://www.incredibleindia.org
+Travel Agent,"travel planning, communication, booking, customer service","₹18,000 - ₹35,000",Decent Work,10th_pass,6,"Learn travel planning|Learn bookings|Practice|Apply",https://www.ibibo.com
+Event Manager,"event management, planning, communication, leadership, creativity","₹25,000 - ₹50,000",Decent Work,12th_pass,12,"Learn event management|Learn planning|Internship|Apply",https://www.eventmanager.com
+Flight Attendant,"customer service, safety, communication, hospitality, grooming","₹25,000 - ₹50,000",Decent Work,12th_pass,6,"Learn hospitality|Learn safety|Get training|Apply to airlines",https://www.airindia.in
+
+# ============================================
+# 🏭 MANUFACTURING & INDUSTRY
+# ============================================
+Production Manager,"production, management, leadership, quality control, process improvement","₹35,000 - ₹65,000",Industry Innovation,graduate,12,"Learn production management|Learn quality control|Leadership|Apply",https://www.apics.org
+Quality Control Inspector,"quality control, inspection, attention to detail, documentation","₹20,000 - ₹35,000",Industry Innovation,12th_pass,6,"Learn quality control|Learn inspection|Get certified|Apply",https://www.asq.org
+Industrial Engineer,"industrial engineering, process improvement, efficiency, lean","₹35,000 - ₹65,000",Industry Innovation,graduate,18,"Learn industrial engineering|Learn lean|Get certified|Apply",https://www.iise.org
+Supply Chain Manager,"supply chain, logistics, management, communication, leadership","₹35,000 - ₹70,000",Industry Innovation,graduate,12,"Learn supply chain|Learn logistics|Get certified|Apply",https://www.apics.org
+Logistics Coordinator,"logistics, coordination, communication, planning, documentation","₹20,000 - ₹38,000",Industry Innovation,12th_pass,6,"Learn logistics|Learn coordination|Practice|Apply",https://www.logistics.gov.in
+
+# ============================================
+# 🚗 TRANSPORTATION & LOGISTICS
+# ============================================
+Driver,"driving, navigation, customer service, safety, time management","₹12,000 - ₹22,000",Industry Innovation,8th_pass,3,"Get driving license|Learn navigation|Practice|Join transport",https://www.transport.gov.in
+Delivery Driver,"driving, navigation, customer service, time management","₹12,000 - ₹20,000",Industry Innovation,8th_pass,2,"Get driving license|Learn navigation|Practice|Join delivery",https://www.amazon.in
+Transport Manager,"transportation, management, logistics, communication, leadership","₹25,000 - ₹45,000",Industry Innovation,12th_pass,12,"Learn transportation|Learn management|Practice|Apply",https://www.transport.gov.in
+Warehouse Manager,"warehouse, inventory, management, leadership, logistics","₹25,000 - ₹45,000",Industry Innovation,12th_pass,12,"Learn warehouse management|Learn inventory|Practice|Apply",https://www.warehouse.com
+
+# ============================================
+# 💰 BANKING & FINANCE
+# ============================================
+Banking Officer - Clerk,"banking, customer service, communication, basic math","₹20,000 - ₹40,000",Decent Work,12th_pass,6,"Learn banking basics|Learn communication|Clear exams|Apply",https://www.ibps.in
+Banking Officer - Probationary Officer (PO),"banking, leadership, management, finance, communication","₹35,000 - ₹65,000",Decent Work,graduate,12,"Learn banking|Learn management|Clear exams|Training|Apply",https://www.ibps.in
+Financial Advisor,"finance, investment, planning, communication, certification","₹25,000 - ₹55,000",Decent Work,graduate,12,"Learn finance|Learn investment|Get certified|Practice|Apply",https://www.sebi.gov.in
+Insurance Agent,"insurance, sales, communication, customer service","₹20,000 - ₹40,000",Decent Work,12th_pass,4,"Learn insurance|Learn sales|Get licensed|Practice|Apply",https://www.irdai.gov.in
+Stock Broker,"stock trading, finance, investment, analysis, technology","₹30,000 - ₹70,000",Industry Innovation,graduate,12,"Learn stock trading|Learn analysis|Get certified|Practice|Apply",https://www.nseindia.com
+
+# ============================================
+# 📡 MEDIA & ENTERTAINMENT
+# ============================================
+Radio Jockey,"radio hosting, communication, creativity, music knowledge","₹20,000 - ₹45,000",Industry Innovation,12th_pass,6,"Learn radio hosting|Learn communication|Practice|Apply",https://www.rj.com
+TV Anchor,"communication, presentation, entertainment, confidence, knowledge","₹30,000 - ₹70,000",Industry Innovation,12th_pass,8,"Learn communication|Learn presentation|Practice|Apply",https://www.newstv.com
+Film Director,"film direction, creativity, leadership, storytelling, communication","₹40,000 - ₹120,000",Industry Innovation,12th_pass,36,"Learn film direction|Learn filmmaking|Build portfolio|Apply",https://www.ftii.ac.in
+Film Editor,"film editing, video editing, storytelling, creativity, software","₹25,000 - ₹55,000",Industry Innovation,12th_pass,12,"Learn film editing|Learn software|Build portfolio|Apply",https://www.adobe.com
+Cinematographer,"cinematography, camera, lighting, composition, creativity","₹30,000 - ₹70,000",Industry Innovation,12th_pass,18,"Learn cinematography|Learn camera|Build portfolio|Apply",https://www.ftii.ac.in
+
+# ============================================
+# 🧪 SCIENCE & RESEARCH
+# ============================================
+Research Scientist,"research, laboratory, analysis, scientific knowledge, communication","₹40,000 - ₹80,000",Industry Innovation,graduate,24,"Complete PhD|Research|Publish papers|Apply",https://www.csir.res.in
+Lab Technician,"lab testing, equipment handling, analysis, safety, documentation","₹18,000 - ₹30,000",Industry Innovation,12th_pass,12,"Learn lab techniques|Get certified|Internship|Apply",https://www.icmr.gov.in
+Biotechnologist,"biotechnology, research, laboratory, analysis, genetics","₹30,000 - ₹60,000",Industry Innovation,graduate,24,"Learn biotechnology|Research|Get certified|Apply",https://www.dbtindia.gov.in
+Environmental Scientist,"environmental science, research, analysis, sustainability","₹30,000 - ₹55,000",Life on Land,graduate,18,"Learn environmental science|Research|Get certified|Apply",https://www.moef.gov.in
+
+# ============================================
+# 🏗️ CONSTRUCTION & REAL ESTATE
+# ============================================
+Civil Engineer,"civil engineering, construction, design, project management","₹30,000 - ₹60,000",Industry Innovation,graduate,24,"Complete civil engineering|Get certified|Internship|Apply",https://www.ciob.org
+Architect,"architecture, design, creativity, technology, project management","₹35,000 - ₹70,000",Industry Innovation,graduate,60,"Complete architecture|Get certified|Internship|Apply",https://www.coa.gov.in
+Construction Manager,"construction, management, leadership, project management","₹35,000 - ₹65,000",Industry Innovation,graduate,18,"Learn construction management|Learn project management|Apply",https://www.ciob.org
+Real Estate Agent,"real estate, sales, communication, negotiation, property knowledge","₹20,000 - ₹50,000",Industry Innovation,12th_pass,6,"Learn real estate|Learn sales|Get licensed|Practice|Apply",https://www.nar-india.org
+Quantity Surveyor,"quantity surveying, estimation, costing, contracts, measurement","₹30,000 - ₹55,000",Industry Innovation,graduate,18,"Learn quantity surveying|Get certified|Internship|Apply",https://www.ciqs.org.uk
+
+# ============================================
+# ⚖️ LAW & LEGAL
+# ============================================
+Lawyer,"law, communication, legal knowledge, client management, ethics","₹30,000 - ₹80,000",Industry Innovation,graduate,36,"Complete LLB|Get certified|Internship|Practice|Apply",https://www.barcouncilofindia.nic.in
+Legal Advisor,"law, legal advice, communication, corporate law, ethics","₹40,000 - ₹90,000",Industry Innovation,graduate,36,"Complete LLB|Get certified|Practice|Apply",https://www.barcouncilofindia.nic.in
+Corporate Lawyer,"corporate law, legal advice, contracts, compliance, ethics","₹50,000 - ₹100,000",Industry Innovation,graduate,36,"Complete LLB|Specialize in corporate|Practice|Apply",https://www.barcouncilofindia.nic.in
+Criminal Lawyer,"criminal law, legal advice, communication, ethics, courtroom","₹35,000 - ₹80,000",Industry Innovation,graduate,36,"Complete LLB|Specialize in criminal|Practice|Apply",https://www.barcouncilofindia.nic.in
+
+# ============================================
+# 🌍 SOCIAL WORK & NGO
+# ============================================
+Social Worker,"social work, empathy, communication, community development, counseling","₹20,000 - ₹40,000",Quality Education,graduate,12,"Complete social work|Internship|Volunteer|Apply",https://www.msw.org
+NGO Manager,"ngo management, social work, leadership, fundraising, community","₹25,000 - ₹50,000",Quality Education,graduate,18,"Learn NGO management|Learn fundraising|Volunteer|Apply",https://www.ngomanager.org
+Community Health Worker,"community health, healthcare, education, outreach, empathy","₹15,000 - ₹25,000",Good Health,10th_pass,6,"Learn community health|Learn outreach|Volunteer|Apply",https://www.nhm.gov.in
+Child Rights Advocate,"child rights, social work, legal knowledge, advocacy, empathy","₹25,000 - ₹45,000",Quality Education,graduate,18,"Learn child rights|Learn advocacy|Volunteer|Apply",https://www.ncpcr.gov.in
+
+# ============================================
+# 🛍️ RETAIL & SALES
+# ============================================
+Retail Sales Executive,"sales, communication, customer service, product knowledge","₹15,000 - ₹30,000",Decent Work,10th_pass,3,"Learn sales|Learn communication|Practice|Apply",https://www.retail.com
+Store Manager,"store management, leadership, retail, inventory, customer service","₹25,000 - ₹45,000",Decent Work,12th_pass,8,"Learn retail|Learn management|Practice|Apply",https://www.retail.com
+E-commerce Manager,"e-commerce, digital marketing, management, analytics, leadership","₹30,000 - ₹55,000",Industry Innovation,graduate,12,"Learn e-commerce|Learn digital marketing|Practice|Apply",https://www.amazon.in
+Merchandiser,"merchandising, retail, inventory, visual display, communication","₹20,000 - ₹35,000",Decent Work,12th_pass,6,"Learn merchandising|Learn retail|Practice|Apply",https://www.retail.com
+Buyer,"buying, negotiation, supplier management, retail, communication","₹25,000 - ₹45,000",Decent Work,graduate,8,"Learn buying|Learn negotiation|Practice|Apply",https://www.retail.com
+
+# ============================================
+# 🎯 SPORTS & FITNESS
+# ============================================
+Sports Coach,"sports coaching, communication, leadership, training, motivation","₹25,000 - ₹50,000",Industry Innovation,12th_pass,12,"Learn coaching|Get certified|Practice|Apply",https://www.sportsauthorityofindia.nic.in
+Fitness Trainer,"fitness training, communication, nutrition, motivation, exercise","₹20,000 - ₹40,000",Good Health,12th_pass,6,"Learn fitness training|Get certified|Practice|Apply",https://www.fitnesstrainer.com
+Physical Education Teacher,"physical education, teaching, sports, communication, leadership","₹25,000 - ₹45,000",Quality Education,12th_pass,18,"Complete B.P.Ed|Get certified|Practice|Apply",https://www.ncte.gov.in
+Yoga Instructor,"yoga, meditation, teaching, communication, health","₹20,000 - ₹40,000",Good Health,12th_pass,6,"Learn yoga|Get certified|Practice|Apply",https://www.yoga.gov.in
+Nutritionist,"nutrition, health, counseling, communication, food science","₹25,000 - ₹50,000",Good Health,graduate,12,"Learn nutrition|Get certified|Practice|Apply",https://www.nutrition.org
+
+# ============================================
+# 🔬 PHARMACEUTICALS
+# ============================================
+Pharmaceutical Scientist,"pharmaceuticals, research, chemistry, biology, analysis","₹35,000 - ₹65,000",Good Health,graduate,18,"Learn pharmaceutical science|Research|Apply",https://www.drugscontroller.gov.in
+Medical Sales Representative,"medical sales, communication, product knowledge, customer service","₹20,000 - ₹40,000",Good Health,12th_pass,6,"Learn medical sales|Learn communication|Practice|Apply",https://www.pharmatimes.com
+Pharmacy Manager,"pharmacy, management, leadership, pharmaceutical, customer service","₹30,000 - ₹55,000",Good Health,12th_pass,24,"Complete BPharm|Learn management|Practice|Apply",https://www.pci.nic.in
+
+# ============================================
+# 📈 INSURANCE
+# ============================================
+Insurance Underwriter,"insurance, underwriting, risk assessment, finance, analysis","₹25,000 - ₹45,000",Decent Work,graduate,12,"Learn insurance|Learn underwriting|Get certified|Apply",https://www.irdai.gov.in
+Insurance Claims Officer,"insurance, claims, customer service, communication, documentation","₹20,000 - ₹35,000",Decent Work,12th_pass,6,"Learn insurance|Learn claims|Practice|Apply",https://www.irdai.gov.in
+Actuary,"actuarial science, mathematics, statistics, finance, risk assessment","₹40,000 - ₹80,000",Decent Work,graduate,36,"Learn actuarial science|Clear exams|Get certified|Apply",https://www.actuariesindia.org

@@ -1,0 +1,307 @@
+{% extends "base.html" %}
+
+{% block title %}{{ career.job_title }} - CareerAI{% endblock %}
+
+{% block extra_css %}
+<style>
+    .career-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 20px;
+        padding: 30px 40px;
+        color: white;
+        margin-bottom: 30px;
+    }
+    
+    .career-header h1 {
+        font-weight: 700;
+        font-size: 2rem;
+    }
+    
+    .career-header .badge-light {
+        background: rgba(255, 255, 255, 0.2) !important;
+        color: white !important;
+        padding: 6px 14px;
+        font-weight: 500;
+    }
+    
+    .scheme-card {
+        background: #f8f9ff;
+        border-radius: 12px;
+        padding: 15px;
+        margin-bottom: 10px;
+        border-left: 4px solid #667eea;
+        transition: all 0.3s ease;
+    }
+    
+    .scheme-card:hover {
+        background: #f0f2ff;
+        transform: translateX(5px);
+    }
+    
+    .scheme-card .scheme-name {
+        font-weight: 600;
+        color: #333;
+        font-size: 15px;
+    }
+    
+    .scheme-card .scheme-detail {
+        font-size: 13px;
+        color: #666;
+        margin-top: 3px;
+    }
+    
+    .college-card {
+        background: white;
+        border-radius: 12px;
+        padding: 15px;
+        margin-bottom: 10px;
+        border: 1px solid #e8ecf1;
+        transition: all 0.3s ease;
+    }
+    
+    .college-card:hover {
+        border-color: #667eea;
+        transform: translateX(5px);
+    }
+    
+    .college-card .college-name {
+        font-weight: 600;
+        color: #333;
+        font-size: 14px;
+    }
+    
+    .college-card .college-detail {
+        font-size: 13px;
+        color: #666;
+        margin-top: 2px;
+    }
+    
+    .skill-tag {
+        display: inline-block;
+        background: #f0f2f8;
+        padding: 4px 14px;
+        border-radius: 20px;
+        font-size: 13px;
+        color: #555;
+        margin: 3px;
+    }
+    
+    .skill-tag:hover {
+        background: #667eea;
+        color: white;
+    }
+    
+    .progress-bar-container {
+        height: 10px;
+        background: #f0f2f8;
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 10px 0;
+    }
+    
+    .progress-bar-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #667eea, #764ba2);
+        border-radius: 10px;
+    }
+    
+    .btn-save-career {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border: none;
+        padding: 10px 24px;
+        border-radius: 10px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        font-size: 14px;
+    }
+    
+    .btn-save-career:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        color: white;
+    }
+    
+    .btn-save-career.saved {
+        background: #28a745;
+    }
+    
+    .btn-save-career.saved:hover {
+        background: #218838;
+    }
+    
+    .btn-save-career:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+    
+    @media (max-width: 768px) {
+        .career-header {
+            padding: 20px;
+        }
+        .career-header h1 {
+            font-size: 1.5rem;
+        }
+        .btn-save-career {
+            width: 100%;
+            margin-top: 10px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="career-header">
+        <div class="d-flex justify-content-between align-items-center flex-wrap">
+            <div>
+                <h1><i class="fas fa-briefcase me-2"></i> {{ career.job_title }}</h1>
+                <p class="mb-0 opacity-90">
+                    <span class="badge badge-light me-2">{{ career.min_education|upper }}</span>
+                    <span class="badge badge-light">{{ career.SDG_category }}</span>
+                </p>
+            </div>
+            <div class="mt-2 mt-md-0">
+                <button onclick="saveCareer()" class="btn-save-career" id="saveCareerBtn">
+                    <i class="fas fa-bookmark"></i> Save Career
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-7">
+            <div class="card mb-4">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold"><i class="fas fa-info-circle text-primary"></i> Career Overview</h5>
+                    <hr>
+                    
+                    <div class="mb-3">
+                        <h6 class="fw-bold"><i class="fas fa-tools text-primary"></i> Required Skills</h6>
+                        <div>
+                            {% for skill in career.required_skills.split(',') %}
+                                <span class="skill-tag">{{ skill.strip() }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <h6 class="fw-bold"><i class="fas fa-money-bill-wave text-primary"></i> Expected Salary</h6>
+                            <p class="mb-0">{{ career.salary }}</p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <h6 class="fw-bold"><i class="fas fa-clock text-primary"></i> Training Duration</h6>
+                            <p class="mb-0">{{ career.training_duration }} months</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <h6 class="fw-bold"><i class="fas fa-road text-primary"></i> Career Pathway</h6>
+                        <ol class="mb-0">
+                            {% for step in career.pathway_steps.split('|') %}
+                                <li>{{ step }}</li>
+                            {% endfor %}
+                        </ol>
+                    </div>
+                    
+                    <div class="mt-3">
+                        <h6 class="fw-bold"><i class="fas fa-percent text-primary"></i> Match Score</h6>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill" style="width: {{ career.match_percent|default(70) }}%;"></div>
+                        </div>
+                        <span class="badge bg-primary mt-2">{{ career.match_percent|default(70) }}% Match</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-5">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="fw-bold"><i class="fas fa-hand-holding-heart text-primary"></i> Government Schemes</h5>
+                    <hr>
+                    {% if schemes and schemes|length > 0 %}
+                        {% for scheme in schemes %}
+                            <div class="scheme-card">
+                                <div class="scheme-name">{{ scheme.scheme_name }}</div>
+                                <div class="scheme-detail"><i class="fas fa-check-circle text-success"></i> {{ scheme.eligible_criteria }}</div>
+                                <div class="scheme-detail"><i class="fas fa-gift text-primary"></i> {{ scheme.benefits }}</div>
+                                {% if scheme.application_link and scheme.application_link != '#' %}
+                                    <a href="{{ scheme.application_link }}" target="_blank" class="btn btn-sm btn-outline-primary mt-2">
+                                        Apply Now <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="text-muted">No specific schemes found.</p>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="fw-bold"><i class="fas fa-university text-primary"></i> Recommended Colleges</h5>
+                    <hr>
+                    {% if colleges and colleges|length > 0 %}
+                        {% for college in colleges %}
+                            <div class="college-card">
+                                <div class="college-name">{{ college }}</div>
+                                <div class="college-detail">Recommended for {{ career.job_title }}</div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="text-muted">No colleges found.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function saveCareer() {
+    var btn = document.getElementById('saveCareerBtn');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+    
+    var careerTitle = "{{ career.job_title|safe }}";
+    var careerData = JSON.parse('{{ career_json|safe }}');
+    
+    fetch('/api/careers/save', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            career_title: careerTitle,
+            career_data: careerData
+        })
+    })
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(data) {
+        if (data.success) {
+            btn.innerHTML = '<i class="fas fa-check"></i> Saved!';
+            btn.className = 'btn-save-career saved';
+            btn.disabled = true;
+            alert('Career saved successfully!');
+        } else {
+            btn.innerHTML = '<i class="fas fa-bookmark"></i> Save Career';
+            btn.className = 'btn-save-career';
+            btn.disabled = false;
+            alert('Error: ' + data.error);
+        }
+    })
+    .catch(function(error) {
+        btn.innerHTML = '<i class="fas fa-bookmark"></i> Save Career';
+        btn.className = 'btn-save-career';
+        btn.disabled = false;
+        alert('Error saving career: ' + error.message);
+    });
+}
+</script>
+{% endblock %}

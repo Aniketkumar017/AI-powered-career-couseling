@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 400">
+  <rect width="500" height="400" fill="#f8f9ff" rx="20"/>
+  <circle cx="250" cy="200" r="120" fill="#667eea" opacity="0.1"/>
+  <circle cx="250" cy="200" r="80" fill="#667eea" opacity="0.2"/>
+  <text x="250" y="180" text-anchor="middle" font-size="40" font-weight="bold" fill="#667eea">Career</text>
+  <text x="250" y="230" text-anchor="middle" font-size="32" font-weight="bold" fill="#764ba2">AI</text>
+  <text x="250" y="280" text-anchor="middle" font-size="16" fill="#666">Find Your Dream Career</text>
+  <rect x="150" y="310" width="200" height="40" rx="20" fill="#667eea"/>
+  <text x="250" y="335" text-anchor="middle" font-size="14" fill="white">Get Started</text>
+</svg>

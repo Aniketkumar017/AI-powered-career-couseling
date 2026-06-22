@@ -1,0 +1,416 @@
+{% extends "base.html" %}
+
+{% block title %}Find Jobs - CareerAI{% endblock %}
+
+{% block extra_css %}
+<style>
+    .jobs-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 20px;
+        padding: 30px 40px;
+        color: white;
+        margin-bottom: 30px;
+    }
+    
+    .jobs-header h2 {
+        font-weight: 700;
+    }
+    
+    .jobs-header p {
+        opacity: 0.9;
+        margin-bottom: 0;
+    }
+    
+    .job-card {
+        background: white;
+        border-radius: 16px;
+        padding: 20px;
+        transition: all 0.3s ease;
+        border: 1px solid #e8ecf1;
+        height: 100%;
+    }
+    
+    .job-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        border-color: #667eea;
+    }
+    
+    .job-card .job-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 5px;
+    }
+    
+    .job-card .company-name {
+        color: #667eea;
+        font-weight: 500;
+        margin-bottom: 10px;
+    }
+    
+    .job-card .job-meta {
+        color: #666;
+        font-size: 13px;
+        margin-bottom: 5px;
+    }
+    
+    .job-card .job-meta i {
+        width: 20px;
+        color: #667eea;
+    }
+    
+    .job-card .job-description {
+        color: #666;
+        font-size: 14px;
+        margin: 10px 0;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    
+    .job-card .job-source {
+        display: inline-block;
+        background: #f0f2f8;
+        padding: 2px 12px;
+        border-radius: 12px;
+        font-size: 11px;
+        color: #666;
+        margin-top: 5px;
+    }
+    
+    .loading-spinner {
+        display: none;
+        text-align: center;
+        padding: 40px;
+    }
+    
+    .loading-spinner .spinner {
+        width: 50px;
+        height: 50px;
+        border: 4px solid #f0f2f8;
+        border-top: 4px solid #667eea;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto;
+    }
+    
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    
+    .no-jobs {
+        text-align: center;
+        padding: 60px 20px;
+        background: white;
+        border-radius: 16px;
+        border: 1px solid #e8ecf1;
+    }
+    
+    .no-jobs i {
+        font-size: 60px;
+        color: #d0d5e0;
+        margin-bottom: 20px;
+    }
+    
+    .btn-apply {
+        background: #28a745;
+        color: white;
+        border: none;
+        padding: 6px 16px;
+        border-radius: 8px;
+        font-size: 13px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+    }
+    
+    .btn-apply:hover {
+        background: #218838;
+        color: white;
+        transform: translateY(-2px);
+    }
+    
+    .btn-save-job {
+        background: transparent;
+        color: #667eea;
+        border: 1.5px solid #667eea;
+        padding: 6px 16px;
+        border-radius: 8px;
+        font-size: 13px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    
+    .btn-save-job:hover {
+        background: #667eea;
+        color: white;
+        transform: translateY(-2px);
+    }
+    
+    .btn-save-job.saved {
+        background: #28a745;
+        color: white;
+        border-color: #28a745;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <!-- Header -->
+    <div class="jobs-header">
+        <div class="d-flex justify-content-between align-items-center flex-wrap">
+            <div>
+                <h2><i class="fas fa-briefcase me-2"></i> Job Search</h2>
+                <p>Find your dream job from top companies</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Form -->
+    <div class="card mb-4">
+        <div class="card-body p-4">
+            <form id="jobSearchForm">
+                <div class="row g-3">
+                    <div class="col-md-5">
+                        <label class="form-label fw-bold">Job Title / Keyword</label>
+                        <input type="text" id="jobTitle" class="form-control" 
+                               placeholder="e.g., Software Developer, Data Entry" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label fw-bold">Location</label>
+                        <input type="text" id="jobLocation" class="form-control" 
+                               placeholder="e.g., Mumbai, Remote" value="India">
+                    </div>
+                    <div class="col-md-3 d-flex align-items-end">
+                        <button type="submit" class="btn btn-primary w-100" style="background: linear-gradient(135deg, #667eea, #764ba2); border: none;">
+                            <i class="fas fa-search"></i> Search Jobs
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Loading -->
+    <div class="loading-spinner" id="loadingJobs">
+        <div class="spinner"></div>
+        <p class="mt-3 text-primary">Searching for jobs...</p>
+    </div>
+
+    <!-- Results -->
+    <div id="jobResults"></div>
+</div>
+
+<script>
+document.getElementById('jobSearchForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    var jobTitle = document.getElementById('jobTitle').value.trim();
+    var location = document.getElementById('jobLocation').value.trim();
+    
+    if (!jobTitle) {
+        showNotification('Please enter a job title', 'warning');
+        return;
+    }
+    
+    var loading = document.getElementById('loadingJobs');
+    var results = document.getElementById('jobResults');
+    
+    loading.style.display = 'block';
+    results.innerHTML = '';
+    
+    try {
+        var response = await fetch('/api/jobs/search', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ job_title: jobTitle, location: location })
+        });
+        
+        var data = await response.json();
+        loading.style.display = 'none';
+        
+        if (data.success && data.data.length > 0) {
+            displayJobs(data.data, data.sources);
+        } else {
+            results.innerHTML = `
+                <div class="no-jobs">
+                    <i class="fas fa-search"></i>
+                    <h5>No jobs found</h5>
+                    <p>Try different keywords or check back later</p>
+                </div>
+            `;
+        }
+    } catch (error) {
+        loading.style.display = 'none';
+        results.innerHTML = `
+            <div class="alert alert-danger">Error searching jobs: ${error.message}</div>
+        `;
+    }
+});
+
+function displayJobs(jobs, sources) {
+    var container = document.getElementById('jobResults');
+    
+    var html = `
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-muted">Found ${jobs.length} jobs ${sources ? 'from ' + sources.join(', ') : ''}</span>
+        </div>
+        <div class="row">
+    `;
+    
+    jobs.forEach(function(job) {
+        var salary = job.salary || 'Not specified';
+        var description = job.description ? job.description.substring(0, 150) + '...' : '';
+        
+        html += `
+            <div class="col-md-6 mb-3">
+                <div class="job-card">
+                    <div class="job-title">${job.title}</div>
+                    <div class="company-name"><i class="fas fa-building"></i> ${job.company}</div>
+                    <div class="job-meta"><i class="fas fa-map-marker-alt"></i> ${job.location}</div>
+                    <div class="job-meta"><i class="fas fa-money-bill"></i> ${salary}</div>
+                    ${job.posted ? `<div class="job-meta"><i class="fas fa-clock"></i> Posted: ${job.posted}</div>` : ''}
+                    <div class="job-description">${description}</div>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <a href="${job.url}" target="_blank" class="btn-apply">
+                            <i class="fas fa-external-link-alt"></i> Apply
+                        </a>
+                        <button onclick="saveJob('${job.title.replace(/'/g, "\\'")}', '${job.company.replace(/'/g, "\\'")}')" class="btn-save-job">
+                            <i class="fas fa-bookmark"></i> Save
+                        </button>
+                        <button onclick="trackApplication('${job.title.replace(/'/g, "\\'")}', '${job.company.replace(/'/g, "\\'")}')" class="btn-save-job" style="border-color: #28a745; color: #28a745;">
+                            <i class="fas fa-check"></i> Applied
+                        </button>
+                    </div>
+                    <span class="job-source"><i class="fas fa-tag"></i> ${job.source}</span>
+                </div>
+            </div>
+        `;
+    });
+    
+    html += '</div>';
+    container.innerHTML = html;
+}
+
+async function saveJob(title, company) {
+    try {
+        var response = await fetch('/api/jobs/save', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                title: title,
+                company: company,
+                job_data: { title: title, company: company }
+            })
+        });
+        
+        var data = await response.json();
+        if (data.success) {
+            showNotification('Job saved successfully!', 'success');
+        } else {
+            showNotification('Error: ' + data.error, 'danger');
+        }
+    } catch (error) {
+        showNotification('Error saving job: ' + error.message, 'danger');
+    }
+}
+
+async function trackApplication(title, company) {
+    try {
+        var response = await fetch('/api/jobs/apply', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                job_title: title,
+                company: company,
+                status: 'applied'
+            })
+        });
+        
+        var data = await response.json();
+        if (data.success) {
+            showNotification('Application tracked! 📝', 'success');
+        } else {
+            showNotification('Error: ' + data.error, 'danger');
+        }
+    } catch (error) {
+        showNotification('Error tracking application: ' + error.message, 'danger');
+    }
+}
+
+function showNotification(message, type) {
+    type = type || 'info';
+    
+    var colors = {
+        success: '#4caf50',
+        danger: '#f44336',
+        warning: '#ff9800',
+        info: '#667eea'
+    };
+    
+    var icons = {
+        success: 'fa-check-circle',
+        danger: 'fa-exclamation-circle',
+        warning: 'fa-exclamation-triangle',
+        info: 'fa-info-circle'
+    };
+    
+    var notification = document.createElement('div');
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: white;
+        padding: 16px 24px;
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        border-left: 4px solid ${colors[type]};
+        z-index: 9999;
+        max-width: 400px;
+        animation: slideIn 0.3s ease;
+    `;
+    notification.innerHTML = `
+        <div class="d-flex align-items-center gap-3">
+            <i class="fas ${icons[type]}" style="color: ${colors[type]}; font-size: 20px;"></i>
+            <span>${message}</span>
+            <button onclick="this.parentElement.parentElement.remove()" style="background: none; border: none; color: #999; font-size: 18px; cursor: pointer;">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    `;
+    document.body.appendChild(notification);
+    
+    setTimeout(function() {
+        if (notification.parentElement) {
+            notification.style.animation = 'fadeOut 0.3s ease forwards';
+            setTimeout(function() {
+                if (notification.parentElement) {
+                    notification.remove();
+                }
+            }, 300);
+        }
+    }, 5000);
+}
+
+// Add animation keyframes
+(function() {
+    var style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translateX(0); }
+            to { opacity: 0; transform: translateX(100px); }
+        }
+    `;
+    document.head.appendChild(style);
+})();
+</script>
+{% endblock %}
