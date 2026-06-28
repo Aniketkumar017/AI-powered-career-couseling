@@ -5,26 +5,21 @@ import sys
 import json
 import requests
 from dotenv import load_dotenv
-import google.generativeai as genai
+# Groq is OpenAI-compatible, no special SDK needed
 from functools import wraps
 
 # Load environment variables
 load_dotenv()
 
 # ============================================
-# GEMINI API CONFIGURATION
+# GROQ API CONFIGURATION
 # ============================================
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
-if GEMINI_API_KEY:
-    try:
-        genai.configure(api_key=GEMINI_API_KEY)
-        print("✅ Gemini API configured successfully")
-    except Exception as e:
-        print(f"❌ Gemini API configuration error: {e}")
-        GEMINI_API_KEY = None
+if GROQ_API_KEY:
+    print("[OK] Groq API configured successfully")
 else:
-    print("❌ GEMINI_API_KEY not found in .env file")
+    print("[ERR] GROQ_API_KEY not found in .env file")
 
 # Add current directory to path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -72,16 +67,19 @@ def login_required(f):
 # ============================================
 
 def get_gemini_career_suggestions(skills, education="", location=""):
-    """Direct Google Gemini API - gemini-2.0-flash"""
-    if not GEMINI_API_KEY:
-        print("❌ Gemini API key not configured")
+    """Groq API - llama-3.3-70b-versatile (fast & free)"""
+    if not GROQ_API_KEY:
+        print("[ERR] Groq API key not configured")
         return None
     
     try:
-        import requests
+        # Groq uses OpenAI-compatible API
+        url = "https://api.groq.com/openai/v1/chat/completions"
         
-        # ✅ CORRECT MODEL NAME - gemini-2.0-flash
-        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={GEMINI_API_KEY}"
+        headers = {
+            "Authorization": f"Bearer {GROQ_API_KEY}",
+            "Content-Type": "application/json"
+        }
         
         prompt = f"""
         You are an AI career counselor for Indian youth.
@@ -91,7 +89,7 @@ def get_gemini_career_suggestions(skills, education="", location=""):
         Location: {location}
         
         Suggest 5 career paths that match these skills.
-        Return ONLY valid JSON array with fields: 
+        Return ONLY a valid JSON array with fields: 
         career, reason, salary_range, training_months, growth.
         
         Example:
@@ -107,23 +105,27 @@ def get_gemini_career_suggestions(skills, education="", location=""):
         """
         
         data = {
-            "contents": [{
-                "parts": [{"text": prompt}]
-            }]
+            "model": "llama-3.3-70b-versatile",
+            "messages": [
+                {"role": "system", "content": "You are a helpful AI career counselor for Indian youth. Always respond with valid JSON only."},
+                {"role": "user", "content": prompt}
+            ],
+            "temperature": 0.7,
+            "max_tokens": 1024
         }
         
-        print(f"🤖 Calling Gemini API for skills: {skills}")
-        response = requests.post(url, json=data, timeout=30)
+        print(f"[AI] Calling Groq API for skills: {skills}")
+        response = requests.post(url, headers=headers, json=data, timeout=30)
         
         if response.status_code != 200:
-            print(f"❌ API Error: {response.status_code}")
+            print(f"[ERR] Groq API Error: {response.status_code}")
             print(f"Response: {response.text}")
             return None
         
         result = response.json()
-        text = result.get('candidates', [{}])[0].get('content', {}).get('parts', [{}])[0].get('text', '')
+        text = result.get('choices', [{}])[0].get('message', {}).get('content', '')
         
-        print(f"📝 Gemini Response: {text[:200]}...")
+        print(f"[LOG] Groq Response: {text[:200]}...")
         
         # Clean JSON
         text = text.strip()
@@ -146,7 +148,7 @@ def get_gemini_career_suggestions(skills, education="", location=""):
                 'salary': item.get('salary_range', '₹15,000 - ₹30,000'),
                 'training_duration': item.get('training_months', 6),
                 'growth': item.get('growth', 'Medium'),
-                'source': 'Gemini AI',
+                'source': 'Groq AI',
                 'match_percent': 90,
                 'is_gemini': True,
                 'required_skills': skills,
@@ -155,15 +157,15 @@ def get_gemini_career_suggestions(skills, education="", location=""):
                 'colleges': predictor.get_colleges_for_career(career_name) if career_name else []
             })
         
-        print(f"✅ Gemini generated {len(formatted)} suggestions")
+        print(f"[OK] Groq generated {len(formatted)} suggestions")
         return formatted
         
     except json.JSONDecodeError as e:
-        print(f"❌ Gemini JSON Parse Error: {e}")
+        print(f"[ERR] Groq JSON Parse Error: {e}")
         return None
         
     except Exception as e:
-        print(f"❌ Gemini API Error: {e}")
+        print(f"[ERR] Groq API Error: {e}")
         return None
 
 # ============================================
@@ -377,10 +379,10 @@ def smart_recommend():
             return jsonify({'success': False, 'error': 'Skills are required'}), 400
         
         print(f"\n{'='*50}")
-        print(f"🔍 Smart Recommendation Request")
-        print(f"📝 Skills: {skills}")
-        print(f"🎓 Education: {education}")
-        print(f"📍 Location: {location}")
+        print(f"[SEARCH] Smart Recommendation Request")
+        print(f"[LOG] Skills: {skills}")
+        print(f"[EDU] Education: {education}")
+        print(f"[MAP] Location: {location}")
         print(f"{'='*50}")
         
         final_results = []
@@ -391,24 +393,24 @@ def smart_recommend():
         db_results = get_database_suggestions(skills, education, location)
         
         if db_results:
-            print(f"✅ Found {len(db_results)} careers in database")
+            print(f"[OK] Found {len(db_results)} careers in database")
             final_results.extend(db_results)
         else:
-            print("❌ No match found in database")
+            print("[ERR] No match found in database")
         
         # Step 2: Agar database mein match nahi mila toh Gemini se lo
         if not db_results:
             fallback_used = True
-            print("🤖 Calling Gemini API...")
+            print("[AI] Calling Gemini API...")
             
             gemini_results = get_gemini_career_suggestions(skills, education, location)
             
             if gemini_results:
                 gemini_used = True
-                print(f"✅ Gemini generated {len(gemini_results)} suggestions")
+                print(f"[OK] Gemini generated {len(gemini_results)} suggestions")
                 final_results.extend(gemini_results)
             else:
-                print("❌ Gemini also failed")
+                print("[ERR] Gemini also failed")
                 # ⚠️ YAHAN PAR "NO CAREERS FOUND" AAYEGA
                 # Koi fake suggestion nahi daal rahe
         
@@ -425,7 +427,7 @@ def smart_recommend():
             except Exception as e:
                 print(f"Save history error: {e}")
         
-        # ✅ YAHAN SE RESPONSE BHEJ RAHE HAIN
+        # [OK] YAHAN SE RESPONSE BHEJ RAHE HAIN
         if final_results:
             response_data = {
                 'success': True,
@@ -438,7 +440,7 @@ def smart_recommend():
             }
             return jsonify(response_data)
         else:
-            # ✅ SIRF TAB "NO CAREERS FOUND" AAYEGA JAB DONO FAIL HO
+            # [OK] SIRF TAB "NO CAREERS FOUND" AAYEGA JAB DONO FAIL HO
             return jsonify({
                 'success': True,
                 'data': [],
@@ -450,7 +452,7 @@ def smart_recommend():
             })
         
     except Exception as e:
-        print(f"❌ Smart recommend error: {e}")
+        print(f"[ERR] Smart recommend error: {e}")
         return jsonify({
             'success': False,
             'error': str(e),
@@ -543,10 +545,10 @@ def health():
         career_count = len(predictor.careers) if hasattr(predictor, 'careers') and predictor.careers is not None else 20
         return jsonify({
             'success': True, 
-            'message': 'Backend running with Gemini AI',
+            'message': 'Backend running with Groq AI',
             'stats': {
                 'careers_available': career_count,
-                'gemini_available': bool(GEMINI_API_KEY)
+                'groq_available': bool(GROQ_API_KEY)
             }
         })
     except Exception as e:
@@ -558,12 +560,12 @@ def health():
 
 if __name__ == "__main__":
     print("\n" + "="*50)
-    print("🚀 AI Career Counsellor with Google Gemini")
+    print("[START] AI Career Counsellor with Groq AI")
     print("="*50)
-    print(f"✅ Gemini API: {'Configured' if GEMINI_API_KEY else '❌ Missing'}")
-    print(f"📡 Server: http://127.0.0.1:5000")
-    print("\n📋 Available APIs:")
-    print("   POST /api/careers/smart_recommend - DB + Gemini recommendations")
+    print(f"[OK] Groq API: {'Configured' if GROQ_API_KEY else '[ERR] Missing'}")
+    print(f"[SERVER] Server: http://127.0.0.1:5000")
+    print("\n[LIST] Available APIs:")
+    print("   POST /api/careers/smart_recommend - DB + Groq AI recommendations")
     print("   POST /api/jobs/search            - Live job listings")
     print("="*50 + "\n")
     
